@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const ComFooter = props => {
+const ComFooter = () => {
 	return (
 		<footer className="footer footer-center p-4 bg-base-300 text-base-content">
 			<div>
 				<p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
 			</div>
 		</footer>
-	)
-}
+	);
+};
 
-ComFooter.propTypes = {}
+ComFooter.propTypes = {};
 
-export default ComFooter
+export default ComFooter;

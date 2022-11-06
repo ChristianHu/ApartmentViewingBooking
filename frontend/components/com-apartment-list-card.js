@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const ComApartmentListCard = ({ PropertyName, PropertyPrice }) => {
 	return (
@@ -6,7 +6,7 @@ const ComApartmentListCard = ({ PropertyName, PropertyPrice }) => {
 			<div>{PropertyName}</div>
 			<div>{PropertyPrice}</div>
 		</div>
-	)
-}
+	);
+};
 
-export default ComApartmentListCard
+export default ComApartmentListCard;

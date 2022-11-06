@@ -2,9 +2,8 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { stateLogin } from "../states/state-general";
 
-function ComNav(props) {
+const ComNav = () => {
 	const stateLoginVal = useRecoilValue(stateLogin);
-
 
 	const renderLogin = () => {
 		if (stateLoginVal) {
@@ -15,15 +14,22 @@ function ComNav(props) {
 							<img src="https://placeimg.com/80/80/people" />
 						</div>
 					</label>
-					<ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+					<ul
+						tabIndex={0}
+						className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+					>
 						<li>
 							<a className="justify-between">
 								Profile
 								<span className="badge">New</span>
 							</a>
 						</li>
-						<li><a>Settings</a></li>
-						<li><a>Logout</a></li>
+						<li>
+							<a>Settings</a>
+						</li>
+						<li>
+							<a>Logout</a>
+						</li>
 					</ul>
 				</div>
 			);
@@ -37,13 +43,10 @@ function ComNav(props) {
 			<div className="flex-1">
 				<a className="btn btn-ghost normal-case text-xl">No More Homeless</a>
 			</div>
-			<div className="flex-none gap-2">
-
-				{renderLogin()}
-			</div>
+			<div className="flex-none gap-2">{renderLogin()}</div>
 		</div>
 	);
-}
+};
 
 ComNav.propTypes = {};
 
