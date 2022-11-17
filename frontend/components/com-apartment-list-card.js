@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Image from "next/image"
 
 const ComApartmentListCard = ({ propertyAddress, propertyPrice, propertySize, propertyRoomNumber, propertyImages }) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -18,46 +19,37 @@ const ComApartmentListCard = ({ propertyAddress, propertyPrice, propertySize, pr
 		
 		return (
 			<div className="flex flex-row items-center p-[10px]">
-				<div className="btn btn-circle" onClick={goToPrevious}>❮</div>
+				<div className="btn btn-circle btn-outline" onClick={goToPrevious}>❮</div>
 				<picture>
 					<source srcSet={propertyImages[currentIndex]} type="image/webp" />
 					<img src={propertyImages[currentIndex]} className="p-[10px]" alt="Apartment Image"/>
 				</picture>
-				<div className="btn btn-circle" onClick={goToNext}>❯</div>
+				<div className="btn btn-circle btn-outline" onClick={goToNext}>❯</div>
 			</div>
 		)
 	}
 
 	return (
-		<div className="apartment-card flex flex-row rounded-[16px] bg-[#F2F2F2]">
-			<div className="w-1/2">{propertyImages && renderImages()}</div>
-			<div className="w-1/2">
+		<div className="apartment-card flex flex-col md:flex-row rounded-[16px] bg-[#F2F2F2]">
+			<div className="m-auto h-1/2 md:w-1/2">{propertyImages && renderImages()}</div>
+			<div className="h-1/2 md:w-1/2">
 				<ul className="card-text-section p-[20px] h-full">
-					<li className="pb-[10px]">{propertyAddress}</li>
+					<li className="pb-[10px] text-lg font-bold">{propertyAddress}</li>
 					<li>
 						<div className="flex flex-row pb-[5px]">
-							<picture>
-								<source srcSet="" type="image/webp" />
-								<img src="" className="object-contain h-[24px] w-[24px]" alt="Price Image"/>
-							</picture>
-							<div className="ml-[10px]">{propertyPrice}</div>
+							<Image width="24" height="24" src="/icon_price.svg" className="object-contain h-[24px] w-[24px]" alt="Room number Image"/>
+							<div className="ml-[10px] font-semibold">{propertyPrice}</div>
 						</div>
 					</li>
 					<li>
 						<div className="flex flex-row pb-[5px]">
-							<picture>
-								<source srcSet="" type="image/webp" />
-								<img src="" className="object-contain h-[24px] w-[24px]" alt="Size Image"/>
-							</picture>
+							<Image width="24" height="24" src="/icon_size.svg" className="object-contain h-[24px] w-[24px]" alt="Room number Image"/>
 							<div className="ml-[10px]">{propertySize}</div>
 						</div>
 					</li>
 					<li>
 						<div className="flex flex-row pb-[5px]">
-							<picture>
-								<source srcSet="" type="image/webp" />
-								<img src="" className="object-contain h-[24px] w-[24px]" alt="Room number Image"/>
-							</picture>
+							<Image width="24" height="24" src="/icon_rooms.svg" className="object-contain h-[24px] w-[24px]" alt="Room number Image"/>
 							<div className="ml-[10px]">{propertyRoomNumber}</div>
 						</div>
 					</li>
