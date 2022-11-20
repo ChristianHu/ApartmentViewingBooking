@@ -96,5 +96,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsByEmail(email);
     }
 
+    @Override
+    public Optional<UserEntity> getUserById(long userId){
+        return userRepository.findById(userId);
+    }
+
 
 }

@@ -14,7 +14,6 @@ public class ApartmentViewingBookingApplication {
 		SpringApplication.run(ApartmentViewingBookingApplication.class, args);
 	}
 
-
 	@Bean
 	public ModelMapper modelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
@@ -26,6 +25,4 @@ public class ApartmentViewingBookingApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-
 }
