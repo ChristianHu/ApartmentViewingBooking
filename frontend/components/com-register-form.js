@@ -127,17 +127,17 @@ const ComRegisterForm = () => {
 				</div>
 				<div className="flex flex-col pt-[18px]">
 					<label className="pb-[4px]">Security Question 1: Coca Cola or Pepsi?</label>
-					<select
+					<input
 						className={
 							errors.secQuestionOne
-								? "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px] border-[2px] border-red-500"
-								: "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px]"
+								? "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px] border-[2px] border-red-500"
+								: "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px]"
 						}
-						{...register("secQuestionOne", { required: "is required" })}
-					>
-						<option value="cocaCola">Coca Cola</option>
-						<option value="pepsi">Pepsi</option>
-					</select>
+						type="text"
+						{...register("secQuestionOne", {
+							required: "is required"
+						})}
+					/>
 					<ErrorMessage
 						errors={errors}
 						name="secQuestionOne"
@@ -146,17 +146,17 @@ const ComRegisterForm = () => {
 				</div>
 				<div className="flex flex-col pt-[18px]">
 					<label className="pb-[4px]">Security Question 2: Cat or Dog?</label>
-					<select
+					<input
 						className={
 							errors.secQuestionTwo
-								? "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px] border-[2px] border-red-500"
-								: "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px]"
+								? "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px] border-[2px] border-red-500"
+								: "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px]"
 						}
-						{...register("secQuestionTwo", { required: "is required" })}
-					>
-						<option value="cat">Cat</option>
-						<option value="dog">Dog</option>
-					</select>
+						type="text"
+						{...register("secQuestionTwo", {
+							required: "is required"
+						})}
+					/>
 					<ErrorMessage
 						errors={errors}
 						name="secQuestionTwo"
