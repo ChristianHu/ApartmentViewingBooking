@@ -28,7 +28,7 @@ const ComRegisterForm = () => {
 						{...register("firstName", {
 							required: "is required",
 							pattern: {
-								value: /[^0-9]$/i,
+								value: /^[^0-9]+$/i,
 								message: "Invalid name",
 							},
 						})}
@@ -51,7 +51,7 @@ const ComRegisterForm = () => {
 						{...register("lastName", {
 							required: "is required",
 							pattern: {
-								value: /[^0-9]$/i,
+								value: /^[^0-9]+$/i,
 								message: "Invalid name",
 							},
 						})}
@@ -75,7 +75,7 @@ const ComRegisterForm = () => {
 							required: "is required",
 							pattern: {
 								value: /^(?:1[01][0-9]|120|1[8-9]|[2-9][0-9])$/i,// age between 18 - 120
-								message: "Invalid age",
+								message: "Invalid age (minimum age is 18)",
 							},
 						})}
 					/>
@@ -126,7 +126,42 @@ const ComRegisterForm = () => {
 					/>
 				</div>
 				<div className="flex flex-col pt-[18px]">
-					<button className="py-[18px] underline">Forgot Password?</button>
+					<label className="pb-[4px]">Security Question 1: Coca Cola or Pepsi?</label>
+					<select
+						className={
+							errors.secQuestionOne
+								? "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px] border-[2px] border-red-500"
+								: "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px]"
+						}
+						{...register("secQuestionOne", { required: "is required" })}>
+						<option value="cocaCola">Coca Cola</option>
+						<option value="pepsi">Pepsi</option>
+					</select>
+					<ErrorMessage
+						errors={errors}
+						name="secQuestionOne"
+						render={({ message }) => <small className="text-red-500">{message}</small>}
+					/>
+				</div>
+				<div className="flex flex-col pt-[18px]">
+					<label className="pb-[4px]">Security Question 2: Cat or Dog?</label>
+					<select
+						className={
+							errors.secQuestionTwo
+								? "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px] border-[2px] border-red-500"
+								: "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px]"
+						}
+						{...register("secQuestionTwo", { required: "is required" })}>
+						<option value="cat">Cat</option>
+						<option value="dog">Dog</option>
+					</select>
+					<ErrorMessage
+						errors={errors}
+						name="secQuestionTwo"
+						render={({ message }) => <small className="text-red-500">{message}</small>}
+					/>
+				</div>
+				<div className="flex flex-col pt-[18px]">
 					<div className="btn">
 						<input type="submit" />
 					</div>
