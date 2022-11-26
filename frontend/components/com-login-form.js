@@ -11,7 +11,6 @@ const ComLoginForm = () => {
 	const onSubmit = (data) => {
 		console.log(data);
 	};
-	console.log(errors);
 
 	return (
 		<div className="m-auto max-w-[400px] px-[20px] my-[20px]">
@@ -58,9 +57,8 @@ const ComLoginForm = () => {
 				</div>
 				<div className="flex flex-col pt-[18px]">
 					<button className="py-[18px] underline">Forgot Password?</button>
-					<div className="btn">
-						<input type="submit" />
-					</div>
+
+					<input className="btn" type="submit" />
 				</div>
 			</form>
 		</div>
