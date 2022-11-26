@@ -1,37 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import Image from "next/image"
+import ComImageSlider from "./com-image-slider";
 
 const ComApartmentListCard = ({ propertyAddress, propertyPrice, propertySize, propertyRoomNumber, propertyImages }) => {
-	const [currentIndex, setCurrentIndex] = useState(0)
-	
-	const renderImages = () => {
-		const goToPrevious = () => {
-			const isFirstImage = currentIndex === 0
-			const newIndex = isFirstImage ? propertyImages.length - 1 : currentIndex - 1
-			setCurrentIndex(newIndex)
-		}
-		
-		const goToNext = () => {
-			const isLastImage = currentIndex === propertyImages.length - 1
-			const newIndex = isLastImage ? 0 : currentIndex + 1
-			setCurrentIndex(newIndex)
-		}
-		
-		return (
-			<div className="flex flex-row items-center p-[10px]">
-				<div className="btn btn-circle btn-outline" onClick={goToPrevious}>❮</div>
-				<picture>
-					<source srcSet={propertyImages[currentIndex]} type="image/webp" />
-					<img src={propertyImages[currentIndex]} className="p-[10px]" alt="Apartment Image"/>
-				</picture>
-				<div className="btn btn-circle btn-outline" onClick={goToNext}>❯</div>
-			</div>
-		)
-	}
 
 	return (
 		<div className="apartment-card flex flex-col md:flex-row rounded-[16px] bg-[#F2F2F2]">
-			<div className="m-auto h-1/2 md:w-1/2">{propertyImages && renderImages()}</div>
+			<ComImageSlider className="m-auto h-1/2 md:w-1/2" images={propertyImages}/>
 			<div className="h-1/2 md:w-1/2">
 				<ul className="card-text-section p-[20px] h-full">
 					<li className="pb-[10px] text-lg font-bold">{propertyAddress}</li>
