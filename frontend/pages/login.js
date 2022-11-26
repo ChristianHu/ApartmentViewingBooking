@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import ComLoginForm from "../components/com-login-form";
+import ComRegisterForm from "../components/com-register-form";
 
 export default function Login() {
 	const [showLogin, setShowLogin] = useState(true)
@@ -16,7 +17,7 @@ export default function Login() {
 				<button onClick={handleRegister}>Register</button>
 			</div>
 			<div>
-				{showLogin ? <ComLoginForm/> : <p>Register</p>}
+				{showLogin ? <ComLoginForm/> : <ComRegisterForm/>}
 			</div>
 		</div>
 	);

@@ -29,7 +29,7 @@ const ComLoginForm = () => {
 							required: "is required",
 							pattern: {
 								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-								message: "invalid email address",
+								message: "Invalid email address",
 							},
 						})}
 					/>
@@ -58,7 +58,7 @@ const ComLoginForm = () => {
 				</div>
 				<div className="flex flex-col pt-[18px]">
 					<button className="py-[18px] underline">Forgot Password?</button>
-					<div className="my-[32px] grid grid-cols-2 gap-8">
+					<div className="btn">
 						<input type="submit" />
 					</div>
 				</div>
