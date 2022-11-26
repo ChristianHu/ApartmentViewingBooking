@@ -1,6 +1,6 @@
+import { ErrorMessage } from "@hookform/error-message";
 import React from "react";
 import { useForm } from "react-hook-form";
-import {ErrorMessage} from "@hookform/error-message";
 
 const ComRegisterForm = () => {
 	const {
@@ -12,7 +12,7 @@ const ComRegisterForm = () => {
 		console.log(data);
 	};
 	console.log(errors);
-	
+
 	return (
 		<div className="m-auto max-w-[400px] px-[20px] my-[20px]">
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +74,7 @@ const ComRegisterForm = () => {
 						{...register("age", {
 							required: "is required",
 							pattern: {
-								value: /^(?:1[01][0-9]|120|1[8-9]|[2-9][0-9])$/i,// age between 18 - 120
+								value: /^(?:1[01][0-9]|120|1[8-9]|[2-9][0-9])$/i, // age between 18 - 120
 								message: "Invalid age (minimum age is 18)",
 							},
 						})}
@@ -133,7 +133,8 @@ const ComRegisterForm = () => {
 								? "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px] border-[2px] border-red-500"
 								: "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px]"
 						}
-						{...register("secQuestionOne", { required: "is required" })}>
+						{...register("secQuestionOne", { required: "is required" })}
+					>
 						<option value="cocaCola">Coca Cola</option>
 						<option value="pepsi">Pepsi</option>
 					</select>
@@ -151,7 +152,8 @@ const ComRegisterForm = () => {
 								? "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px] border-[2px] border-red-500"
 								: "h-[40px] rounded-[8px] bg-[#F2F2F2] px-[12px]"
 						}
-						{...register("secQuestionTwo", { required: "is required" })}>
+						{...register("secQuestionTwo", { required: "is required" })}
+					>
 						<option value="cat">Cat</option>
 						<option value="dog">Dog</option>
 					</select>
@@ -162,9 +164,7 @@ const ComRegisterForm = () => {
 					/>
 				</div>
 				<div className="flex flex-col pt-[18px]">
-					<div className="btn">
-						<input type="submit" />
-					</div>
+					<input className="btn" type="submit" />
 				</div>
 			</form>
 		</div>
