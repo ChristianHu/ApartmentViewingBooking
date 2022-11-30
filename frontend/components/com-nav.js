@@ -1,7 +1,7 @@
+import Link from "next/link";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { stateLogin } from "../states/state-general";
-
 const ComNav = () => {
 	const stateLoginVal = useRecoilValue(stateLogin);
 
@@ -34,7 +34,11 @@ const ComNav = () => {
 				</div>
 			);
 		} else {
-			return <button className="btn btn-active btn-primary">Login or Register</button>;
+			return (
+				<Link href="/login">
+					<button className="btn btn-active btn-primary">Login or Register</button>
+				</Link>
+			);
 		}
 	};
 
