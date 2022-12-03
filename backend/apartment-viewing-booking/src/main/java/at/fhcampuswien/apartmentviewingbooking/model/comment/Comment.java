@@ -3,6 +3,7 @@ package at.fhcampuswien.apartmentviewingbooking.model.comment;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "comments")
+@ApiModel(description = "All details about the comments.")
 public class Comment implements Serializable {
     @Serial
     private static final long serialVersionUID = 7666233524926201612L;

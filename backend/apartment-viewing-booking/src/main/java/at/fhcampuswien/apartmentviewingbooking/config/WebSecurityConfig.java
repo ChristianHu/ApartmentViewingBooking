@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -68,6 +69,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers("/api/apartment/auth/**").permitAll()
+                .antMatchers("/api/apartment/flats/swagger-ui/**").permitAll()
+                .antMatchers("/api/apartment/bookings/swagger-ui/**").permitAll()
+                .antMatchers("/api/apartment/comments/swagger-ui/**").permitAll()
+                .antMatchers("/api/apartment/users/swagger-ui/**").permitAll()
+                .antMatchers("/api/apartment/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html",  "/swagger-resources/configuration/ui", "/swagger-resources/configuration/security").permitAll()
                 .antMatchers("/resources/**", "/static/**", "/webjars/**").permitAll()
                 .antMatchers(h2ConsolePath + "/**").permitAll()
                 .anyRequest().authenticated();
@@ -76,4 +84,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/webjars/**");
+    }
 }

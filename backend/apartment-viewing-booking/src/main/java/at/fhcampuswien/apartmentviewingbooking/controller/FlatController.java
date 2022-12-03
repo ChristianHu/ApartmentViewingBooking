@@ -1,8 +1,6 @@
 package at.fhcampuswien.apartmentviewingbooking.controller;
 
-import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
-import at.fhcampuswien.apartmentviewingbooking.model.user.UserResponseModel;
 import at.fhcampuswien.apartmentviewingbooking.service.flatService.FlatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,24 +24,16 @@ public class FlatController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<?>> getAllFlats() {
+    public ResponseEntity<List<Flat>> getAllFlats() {
         List<Flat> flats =flatService.getAllFlats();
 
         return new ResponseEntity<>(flats,HttpStatus.OK);
     }
 
     @GetMapping(path = "/{flatId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getFlat(@PathVariable long flatId) {
-        ResponseEntity<?> response;
+    public ResponseEntity<Flat> getFlat(@PathVariable long flatId) {
         Optional<Flat> flat = flatService.getFlatByID(flatId);
 
-        if (flat.isPresent()) {
-            response = new ResponseEntity<>(flat.get(), HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return response;
+        return flat.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
-
-
 }

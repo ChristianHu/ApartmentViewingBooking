@@ -5,6 +5,7 @@ import at.fhcampuswien.apartmentviewingbooking.model.image.CodeImage;
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "bookings")
+@ApiModel(description = "All details about the Bookings.")
 public class Booking implements Serializable {
 
     @Serial

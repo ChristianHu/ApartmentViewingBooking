@@ -2,6 +2,7 @@ package at.fhcampuswien.apartmentviewingbooking.model.user;
 
 import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
 import at.fhcampuswien.apartmentviewingbooking.model.comment.Comment;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.ToString;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users")
+@ApiModel(description = "All details about the users.")
 public class UserEntity implements Serializable {
 
     @Serial
