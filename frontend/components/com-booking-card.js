@@ -10,6 +10,11 @@ const ComBookingCard = ({
 							propertyRoomNumber,
 							propertyImages,
 						}) => {
+	
+	const handleCancelBooking = () => {
+		// TODO: handle cancel booking
+	}
+	
 	return (
 		<div className="m-auto apartment-card flex flex-col rounded-[16px] bg-[#F2F2F2] w-5/6 md:w-3/5 my-6">
 			<div className=" flex flex-col md:flex-row ">
@@ -34,11 +39,11 @@ const ComBookingCard = ({
 					</ul>
 					<ul className="flex flex-row">
 						<li className="w-[50px]">Time:</li>
-						<li>Placeholder Date</li>
+						<li>Placeholder Time</li>
 					</ul>
 				</div>
 				<div className="md:float-right mt-[15px] md:mt-[0px]">
-					<button className="flex flex-row m-auto btn ">Cancel Booking</button>
+					<button className="flex flex-row m-auto btn " onClick={handleCancelBooking}>Cancel Booking</button>
 				</div>
 			</div>
 		</div>

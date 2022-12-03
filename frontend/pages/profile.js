@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {mockApartments} from "../mocks/mock-apartments";
 import ComBookingCard from "../components/com-booking-card";
+import ComPersonalDataForm from "../components/com-personaldata-form";
 
 export default function Profile() {
 	const [showMyBookings, setShowMyBookings] = useState(true)
@@ -21,7 +22,7 @@ export default function Profile() {
 					{mockApartments.map((apartment, index) => (
 						<ComBookingCard key={index} {...apartment} />
 					))}
-				</div> : <div/>}
+				</div> : <ComPersonalDataForm/>}
 			</div>
 		</div>
 	);
