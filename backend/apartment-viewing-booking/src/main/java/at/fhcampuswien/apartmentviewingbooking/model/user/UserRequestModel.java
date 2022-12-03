@@ -34,7 +34,6 @@ public class UserRequestModel {
     private String email;
 
     @NotNull(message = "Age cannot be null")
-    @Size(min = 18, max = 99, message = "Age must be between 18 and 99")
     private int age;
 
     @NotNull(message = "security answer one cannot be null")

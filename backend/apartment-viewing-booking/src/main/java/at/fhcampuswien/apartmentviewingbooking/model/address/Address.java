@@ -1,6 +1,7 @@
 package at.fhcampuswien.apartmentviewingbooking.model.address;
 
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "addresses")
+@ApiModel(description = "All details about the Address.")
 public class Address {
 
     @Id

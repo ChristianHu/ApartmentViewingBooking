@@ -2,6 +2,7 @@ package at.fhcampuswien.apartmentviewingbooking.model.image;
 
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,6 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "flatImages")
+@ApiModel(description = "All details about the flat images.")
 public class FlatImage {
 
     @Id

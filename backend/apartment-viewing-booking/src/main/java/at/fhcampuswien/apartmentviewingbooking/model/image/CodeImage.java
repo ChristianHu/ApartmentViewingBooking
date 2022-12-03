@@ -1,6 +1,7 @@
 package at.fhcampuswien.apartmentviewingbooking.model.image;
 
 import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "codeImages")
+@ApiModel(description = "All details about the code images.")
 public class CodeImage {
     @Id
     @Column(name = "codeImage_id")
