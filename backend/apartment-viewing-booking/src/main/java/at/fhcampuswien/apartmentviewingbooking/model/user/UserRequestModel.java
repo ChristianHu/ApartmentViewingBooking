@@ -25,7 +25,7 @@ public class UserRequestModel {
     private String password;
 
     @NotNull(message = "Last name cannot be null")
-    @Size(min = 3, message = "Username must not be less than three characters")
+    @Size(min = 2, message = "Username must not be less than three characters")
     private String username;
 
 

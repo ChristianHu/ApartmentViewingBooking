@@ -58,6 +58,5 @@ public class Booking implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Flat flat;
-
 }
 
