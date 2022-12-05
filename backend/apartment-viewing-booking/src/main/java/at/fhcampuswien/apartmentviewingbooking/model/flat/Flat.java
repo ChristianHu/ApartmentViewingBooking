@@ -12,6 +12,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -47,4 +48,8 @@ public class Flat implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "flat_id", referencedColumnName = "address_id")
     private Address address;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "flat")
+    private List<FlatBookingTimes> avaiableBookingTimes;
 }

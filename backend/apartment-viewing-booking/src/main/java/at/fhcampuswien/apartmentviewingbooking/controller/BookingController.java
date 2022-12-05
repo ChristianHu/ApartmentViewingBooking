@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,9 @@ public class BookingController {
     }
 
     @PostMapping("/user/{userId}/flat/{flatId}")
-    public ResponseEntity<Booking> bookFlat(@PathVariable long userId, @PathVariable long flatId) {
-        Optional<Booking> booking = bookingService.createBooking(userId, flatId);
+    public ResponseEntity<Booking> bookFlat(@PathVariable long userId, @PathVariable long flatId , @RequestBody LocalDateTime bookingTime) {
+
+        Optional<Booking> booking = bookingService.createBooking(userId, flatId, bookingTime);
 
         return booking.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }

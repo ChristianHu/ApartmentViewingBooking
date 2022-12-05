@@ -9,6 +9,7 @@ import at.fhcampuswien.apartmentviewingbooking.service.userservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +27,12 @@ public class BookingService {
         this.userService = userService;
     }
 
-    public Optional<Booking> createBooking(long userId, long flatId) {
+    public Optional<Booking> createBooking(long userId, long flatId, LocalDateTime bookingTime) {
         Optional<Booking> result;
         Booking booking = new Booking();
+
+
+
 
         Optional<UserEntity> userEntity = userService.getUserById(userId);
         Optional<Flat> flatEntity = flatService.getFlatByID(flatId);
@@ -36,6 +40,8 @@ public class BookingService {
         if (userEntity.isPresent() && flatEntity.isPresent()) {
             booking.setFlat(flatEntity.get());
             booking.setUser(userEntity.get());
+
+            booking.setStartRentingDate(bookingTime);
 
             bookingRepository.save(booking);
 
