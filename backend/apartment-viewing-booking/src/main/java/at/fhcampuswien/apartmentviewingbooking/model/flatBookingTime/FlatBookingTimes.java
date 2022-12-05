@@ -1,6 +1,7 @@
-package at.fhcampuswien.apartmentviewingbooking.model.flat;
+package at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime;
 
 
+import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;

@@ -3,6 +3,7 @@ package at.fhcampuswien.apartmentviewingbooking.model.flat;
 import at.fhcampuswien.apartmentviewingbooking.model.address.Address;
 import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
 import at.fhcampuswien.apartmentviewingbooking.model.comment.Comment;
+import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTimes;
 import at.fhcampuswien.apartmentviewingbooking.model.image.FlatImage;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
@@ -12,7 +13,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
