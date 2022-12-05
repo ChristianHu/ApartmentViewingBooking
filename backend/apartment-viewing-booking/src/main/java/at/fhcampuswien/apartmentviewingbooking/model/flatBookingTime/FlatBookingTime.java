@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "FlatBookingTimes")
 @ApiModel(description = "An booking date for the flat.")
-public class FlatBookingTimes {
+public class FlatBookingTime {
     @Id
     @Column(name = "flatBookingTime_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

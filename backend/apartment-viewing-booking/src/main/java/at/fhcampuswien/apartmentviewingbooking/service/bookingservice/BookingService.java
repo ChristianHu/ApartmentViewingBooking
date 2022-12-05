@@ -2,8 +2,10 @@ package at.fhcampuswien.apartmentviewingbooking.service.bookingservice;
 
 import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
+import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserEntity;
 import at.fhcampuswien.apartmentviewingbooking.repository.BookingRepository;
+import at.fhcampuswien.apartmentviewingbooking.service.FlatBookingTimesService.FlatBookingTimesService;
 import at.fhcampuswien.apartmentviewingbooking.service.flatService.FlatService;
 import at.fhcampuswien.apartmentviewingbooking.service.userservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,36 +21,42 @@ public class BookingService {
     private BookingRepository bookingRepository;
     private FlatService flatService;
     private UserService userService;
+    private FlatBookingTimesService flatBookingTimesService;
 
     @Autowired
-    public BookingService(BookingRepository bookingRepository, FlatService flatService, UserService userService) {
+    public BookingService(BookingRepository bookingRepository, FlatService flatService, UserService userService, FlatBookingTimesService flatBookingTimesService) {
         this.bookingRepository = bookingRepository;
         this.flatService = flatService;
         this.userService = userService;
+        this.flatBookingTimesService = flatBookingTimesService;
     }
 
     public Optional<Booking> createBooking(long userId, long flatId, LocalDateTime bookingTime) {
-        Optional<Booking> result;
+        Optional<Booking> result = null;
         Booking booking = new Booking();
-
-
 
 
         Optional<UserEntity> userEntity = userService.getUserById(userId);
         Optional<Flat> flatEntity = flatService.getFlatByID(flatId);
 
+
         if (userEntity.isPresent() && flatEntity.isPresent()) {
-            booking.setFlat(flatEntity.get());
-            booking.setUser(userEntity.get());
+            Optional<FlatBookingTime> flatBookingTimeEntity = flatBookingTimesService.getFBTbyFlatAndDateTime(flatEntity.get(), bookingTime);
+            if (flatBookingTimeEntity.isPresent()) {
+                if (flatBookingTimeEntity.get().isAlreadyBooked() == false) {
 
-            booking.setStartRentingDate(bookingTime);
+                    booking.setFlat(flatEntity.get());
+                    booking.setUser(userEntity.get());
 
-            bookingRepository.save(booking);
+                    booking.setStartRentingDate(bookingTime);
 
-            result = Optional.of(booking);
+                    bookingRepository.save(booking);
 
-        } else {
-            result = null;
+                    result = Optional.of(booking);
+
+                    flatBookingTimesService.bookingTime(flatId, bookingTime);
+                }
+            }
         }
         return result;
     }

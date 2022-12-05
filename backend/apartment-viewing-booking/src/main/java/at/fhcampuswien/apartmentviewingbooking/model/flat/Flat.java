@@ -3,7 +3,7 @@ package at.fhcampuswien.apartmentviewingbooking.model.flat;
 import at.fhcampuswien.apartmentviewingbooking.model.address.Address;
 import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
 import at.fhcampuswien.apartmentviewingbooking.model.comment.Comment;
-import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTimes;
+import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.model.image.FlatImage;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
@@ -51,5 +51,5 @@ public class Flat implements Serializable {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "flat")
-    private List<FlatBookingTimes> avaiableBookingTimes;
+    private List<FlatBookingTime> avaiableBookingTimes;
 }

@@ -1,6 +1,7 @@
 package at.fhcampuswien.apartmentviewingbooking.controller;
 
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
+import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.service.flatService.FlatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,15 @@ public class FlatController {
 
         return flat.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
+
+    @GetMapping(path = "/getBookingTimesForFlat{flatId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FlatBookingTime>> getFlatBookingTimes(@PathVariable long flatId) {
+        Optional<List<FlatBookingTime>> flat = flatService.getFlatBookingTimesByID(flatId);
+
+        return flat.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+
 
 
 }
