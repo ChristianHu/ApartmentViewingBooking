@@ -1,6 +1,7 @@
 package at.fhcampuswien.apartmentviewingbooking.controller;
 
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
+import at.fhcampuswien.apartmentviewingbooking.model.flat.FlatRequest;
 import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.service.flatService.FlatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +27,34 @@ public class FlatController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Flat>> getAllFlats() {
-        List<Flat> flats =flatService.getAllFlats();
+        try {
 
-        return new ResponseEntity<>(flats,HttpStatus.OK);
+
+            List<Flat> flats = flatService.getAllFlats();
+
+            return new ResponseEntity<>(flats, HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("\n Error:\n");
+            System.out.println(e);
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping(path = "/{flatId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Flat> getFlat(@PathVariable long flatId) {
-        Optional<Flat> flat = flatService.getFlatByID(flatId);
+        try {
 
-        return flat.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+
+            Optional<Flat> flat = flatService.getFlatByID(flatId);
+
+            return flat.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        }catch (Exception e){
+            System.out.println("\n Error:\n");
+            System.out.println(e);
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping(path = "/getBookingTimesForFlat{flatId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,6 +64,20 @@ public class FlatController {
         return flat.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
+
+    @PostMapping(path = "/createFlat")
+    public ResponseEntity<Flat> createFlat(@RequestBody FlatRequest flatRequest){
+
+
+        try {
+            return new ResponseEntity<Flat>(flatService.createFlat(flatRequest),HttpStatus.OK);
+        }catch (Exception e) {
+            System.out.println("\n Error:\n");
+            System.out.println(e);
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 

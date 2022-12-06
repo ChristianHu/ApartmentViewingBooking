@@ -1,6 +1,9 @@
 package at.fhcampuswien.apartmentviewingbooking.service.flatService;
 
+import at.fhcampuswien.apartmentviewingbooking.model.address.Address;
+import at.fhcampuswien.apartmentviewingbooking.model.address.AddressRequest;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
+import at.fhcampuswien.apartmentviewingbooking.model.flat.FlatRequest;
 import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.repository.FlatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,29 @@ public class FlatService {
         }
 
         return result;
+    }
+
+
+    public Flat createFlat(FlatRequest flatRequest){
+        Flat flat = new Flat();
+        flat.setSize(flatRequest.getSize());
+        flat.setPrice(flatRequest.getPrice());
+        flat.setDescription(flatRequest.getDescription());
+
+        AddressRequest addressRequest =flatRequest.getAddress();
+
+        Address address=new Address();
+        address.setCity(addressRequest.getCity());
+        address.setBuildingNumber(addressRequest.getBuildingNumber());
+        address.setCountry(addressRequest.getCountry());
+        address.setFlatNumber(addressRequest.getFlatNumber());
+        address.setRiseNumber(addressRequest.getRiseNumber());
+        address.setState(addressRequest.getState());
+        address.setStreet(addressRequest.getStreet());
+
+        flat.setAddress(address);
+
+        return flatRepository.save(flat);
     }
 
 }

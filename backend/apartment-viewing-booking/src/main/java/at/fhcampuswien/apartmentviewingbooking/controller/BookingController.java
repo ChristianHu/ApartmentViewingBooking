@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +24,22 @@ public class BookingController {
     }
 
     @PostMapping("/user/{userId}/flat/{flatId}")
-    public ResponseEntity<Booking> bookFlat(@PathVariable long userId, @PathVariable long flatId , @RequestBody LocalDateTime bookingTime) {
+    public ResponseEntity<Booking> bookFlat(@PathVariable long userId, @PathVariable long flatId , @RequestBody String bookingTime) {
 
-        Optional<Booking> booking = bookingService.createBooking(userId, flatId, bookingTime);
+        try {
 
-        return booking.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime localDateTime = LocalDateTime.parse(bookingTime, formatter);
+
+            Optional<Booking> booking = bookingService.createBooking(userId, flatId, localDateTime);
+
+            return booking.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        }catch (Exception e){
+            System.out.println("\n Error:\n");
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("{bookingId}")
