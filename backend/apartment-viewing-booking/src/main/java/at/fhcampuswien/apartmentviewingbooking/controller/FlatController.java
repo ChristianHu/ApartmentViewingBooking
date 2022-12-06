@@ -33,7 +33,7 @@ public class FlatController {
             List<Flat> flats = flatService.getAllFlats();
 
             return new ResponseEntity<>(flats, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("\n Error:\n");
             System.out.println(e);
 
@@ -49,7 +49,7 @@ public class FlatController {
             Optional<Flat> flat = flatService.getFlatByID(flatId);
 
             return flat.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("\n Error:\n");
             System.out.println(e);
 
@@ -66,19 +66,18 @@ public class FlatController {
 
 
     @PostMapping(path = "/createFlat")
-    public ResponseEntity<Flat> createFlat(@RequestBody FlatRequest flatRequest){
+    public ResponseEntity<Flat> createFlat(@RequestBody FlatRequest flatRequest) {
 
 
         try {
-            return new ResponseEntity<Flat>(flatService.createFlat(flatRequest),HttpStatus.OK);
-        }catch (Exception e) {
+            return new ResponseEntity<Flat>(flatService.createFlat(flatRequest), HttpStatus.OK);
+        } catch (Exception e) {
             System.out.println("\n Error:\n");
             System.out.println(e);
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 
 }

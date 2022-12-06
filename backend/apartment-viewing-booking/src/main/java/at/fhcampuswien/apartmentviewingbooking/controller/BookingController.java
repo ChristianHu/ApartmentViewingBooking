@@ -24,7 +24,7 @@ public class BookingController {
     }
 
     @PostMapping("/user/{userId}/flat/{flatId}")
-    public ResponseEntity<Booking> bookFlat(@PathVariable long userId, @PathVariable long flatId , @RequestBody String bookingTime) {
+    public ResponseEntity<Booking> bookFlat(@PathVariable long userId, @PathVariable long flatId, @RequestBody String bookingTime) {
 
         try {
 
@@ -35,7 +35,7 @@ public class BookingController {
             Optional<Booking> booking = bookingService.createBooking(userId, flatId, localDateTime);
 
             return booking.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("\n Error:\n");
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
