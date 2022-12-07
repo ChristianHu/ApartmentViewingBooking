@@ -29,6 +29,7 @@ const ComApartmentCard = ({
 								/>
 							</li>
 							<li>
+	
 								<Image width="12" height="24" src="/icon_arrow_right.svg" className="object-contain h-[24px] w-[12px] mt-[20px] mr-[10px]" alt="Arrow right image"/>
 							</li>
 						</ul>

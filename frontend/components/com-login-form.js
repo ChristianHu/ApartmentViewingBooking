@@ -1,15 +1,26 @@
 import { ErrorMessage } from "@hookform/error-message";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useSetRecoilState } from "recoil";
+import { constGen } from "../constants/const-gen";
+import { stateLogin } from "../states/state-general";
+import { requestSender } from "../utils/util-fetch";
+
+const reqLogin = async (data, setter) => {
+	const res = await requestSender("POST", constGen.host + "/auth/signin", null, data);
+	console.log(res);
+	setter(res.data);
+};
 
 const ComLoginForm = () => {
+	const setLogin = useSetRecoilState(stateLogin);
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 	const onSubmit = (data) => {
-		console.log(data);
+		reqLogin(data, setLogin);
 	};
 
 	return (

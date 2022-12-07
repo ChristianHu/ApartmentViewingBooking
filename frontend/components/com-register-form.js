@@ -1,6 +1,13 @@
 import { ErrorMessage } from "@hookform/error-message";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { constGen } from "../constants/const-gen";
+import { requestSender } from "../utils/util-fetch";
+
+const reqRegister = async (data, setter) => {
+	const res = await requestSender("POST", constGen.host + "/auth/signup", null, data);
+	setter(res.data);
+};
 
 const ComRegisterForm = () => {
 	const {
@@ -9,7 +16,7 @@ const ComRegisterForm = () => {
 		formState: { errors },
 	} = useForm();
 	const onSubmit = (data) => {
-		console.log(data);
+		reqRegister(data, console.log);
 	};
 	console.log(errors);
 
@@ -70,7 +77,7 @@ const ComRegisterForm = () => {
 								? "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px] border-[2px] border-red-500"
 								: "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px]"
 						}
-						type="text"
+						type="number"
 						{...register("age", {
 							required: "is required",
 							pattern: {
@@ -152,18 +159,18 @@ const ComRegisterForm = () => {
 					<label className="pb-[4px]">Security Question 1: Coca Cola or Pepsi?</label>
 					<input
 						className={
-							errors.secQuestionOne
+							errors.securityAnswerOne
 								? "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px] border-[2px] border-red-500"
 								: "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px]"
 						}
 						type="text"
-						{...register("secQuestionOne", {
-							required: "is required"
+						{...register("securityAnswerOne", {
+							required: "is required",
 						})}
 					/>
 					<ErrorMessage
 						errors={errors}
-						name="secQuestionOne"
+						name="securityAnswerOne"
 						render={({ message }) => <small className="text-red-500">{message}</small>}
 					/>
 				</div>
@@ -171,18 +178,18 @@ const ComRegisterForm = () => {
 					<label className="pb-[4px]">Security Question 2: Cat or Dog?</label>
 					<input
 						className={
-							errors.secQuestionTwo
+							errors.securityAnswerTwo
 								? "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px] border-[2px] border-red-500"
 								: "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px]"
 						}
 						type="text"
-						{...register("secQuestionTwo", {
-							required: "is required"
+						{...register("securityAnswerTwo", {
+							required: "is required",
 						})}
 					/>
 					<ErrorMessage
 						errors={errors}
-						name="secQuestionTwo"
+						name="securityAnswerTwo"
 						render={({ message }) => <small className="text-red-500">{message}</small>}
 					/>
 				</div>
