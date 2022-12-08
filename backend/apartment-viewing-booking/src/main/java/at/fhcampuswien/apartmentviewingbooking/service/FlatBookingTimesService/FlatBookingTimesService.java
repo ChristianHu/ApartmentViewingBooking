@@ -1,5 +1,6 @@
 package at.fhcampuswien.apartmentviewingbooking.service.FlatBookingTimesService;
 
+import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.repository.FlatBookingTimesRepository;
@@ -22,6 +23,18 @@ public class FlatBookingTimesService {
         this.flatBookingTimesRepository = flatBookingTimesRepository;
         this.flatService = flatService;
     }
+
+
+
+    public FlatBookingTime createFlatBookingTime(Flat flat, LocalDateTime localDateTime){
+        FlatBookingTime flatBookingTime = new FlatBookingTime();
+        flatBookingTime.setFlat(flat);
+        flatBookingTime.setBookingDate(localDateTime);
+        flatBookingTime.setAlreadyBooked(false);
+
+        return flatBookingTimesRepository.save(flatBookingTime);
+    }
+
 
     public Optional<FlatBookingTime> bookingTime(long flatId, LocalDateTime localDateTime) {
 
