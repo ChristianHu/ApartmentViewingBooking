@@ -57,11 +57,11 @@ const ComBookingCard = ({ id, startRentingDate, flatId }) => {
 						<li className="underline mr-[10px]">Date and Time: </li>
 						<li>{startRentingDate}</li>
 					</ul>
-					{/* <QRCode className="m-auto flex flex-row bg-white" value={id} /> */}
+					{}
 				</div>
 			</div>
 			<div>
-				<QRCode className="m-auto flex flex-row bg-white" value={id} />
+				<QRCode className="m-auto flex flex-row bg-white mb-[20px]" value={id} />
 			</div>
 		</div>
 	);
