@@ -1,6 +1,5 @@
 package at.fhcampuswien.apartmentviewingbooking.model.address;
 
-import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
 
@@ -31,6 +30,4 @@ public class Address {
     private String city;
     private String state;
     private String country;
-//    @OneToOne(mappedBy = "address")
-//    private Flat flat;
 }

@@ -3,7 +3,7 @@ package at.fhcampuswien.apartmentviewingbooking.service.FlatBookingTimesService;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.repository.FlatBookingTimesRepository;
-import at.fhcampuswien.apartmentviewingbooking.service.flatService.FlatService;
+import at.fhcampuswien.apartmentviewingbooking.service.flatservice.FlatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

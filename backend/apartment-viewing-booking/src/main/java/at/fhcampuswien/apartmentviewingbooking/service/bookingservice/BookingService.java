@@ -6,7 +6,7 @@ import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBooking
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserEntity;
 import at.fhcampuswien.apartmentviewingbooking.repository.BookingRepository;
 import at.fhcampuswien.apartmentviewingbooking.service.FlatBookingTimesService.FlatBookingTimesService;
-import at.fhcampuswien.apartmentviewingbooking.service.flatService.FlatService;
+import at.fhcampuswien.apartmentviewingbooking.service.flatservice.FlatService;
 import at.fhcampuswien.apartmentviewingbooking.service.userservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +42,7 @@ public class BookingService {
 
         if (userEntity.isPresent() && flatEntity.isPresent()) {
             Optional<FlatBookingTime> flatBookingTimeEntity = flatBookingTimesService.getFBTbyFlatAndDateTime(flatEntity.get(), bookingTime);
-            if (flatBookingTimeEntity.isPresent()) {
-                if (flatBookingTimeEntity.get().isAlreadyBooked() == false) {
-
+            if (flatBookingTimeEntity.isPresent() && !flatBookingTimeEntity.get().isAlreadyBooked()) {
                     booking.setFlat(flatEntity.get());
                     booking.setUser(userEntity.get());
 
@@ -55,7 +53,6 @@ public class BookingService {
                     result = Optional.of(booking);
 
                     flatBookingTimesService.bookingTime(flatId, bookingTime);
-                }
             }
         }
         return result;
