@@ -27,7 +27,9 @@ export default function Home() {
 					/*loginState&&*/ apartmentsList ? (
 						apartmentsList.map((apartment, index) => <ComApartmentCard key={index} {...apartment} />)
 					) : (
-						<p>You need to login!</p>
+						<div className="m-auto flex flex-row w-full place-content-center">
+							<div className="m-auto flex flex-col mx-[20px] my-[20px] p-[50px] h-[80px] place-content-center bg-[#EC6F69] border-2 border-[#EB625C] drop-shadow-2xl text-white text-center rounded-[8px] font-semibold">Please login to search for Apartments!</div>
+						</div>
 					)
 				}
 			</LaySidebarLeft>

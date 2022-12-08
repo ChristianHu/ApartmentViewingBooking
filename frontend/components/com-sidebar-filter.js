@@ -17,52 +17,52 @@ const ComSidebarFilter = () => {
 	};
 
 	return (
-		<div className="drawer-side">
+		<div className="drawer-side m-auto flex flex-row mb-[20px] max-w-[375px]">
 			<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<label className="input-group my-4 px-2">
-					<span>Address</span>
+				<label className="input-group my-4 px-2 max-w-[375px]">
+					<span className="px-[10px]">Address</span>
 					<input
 						defaultValue={apartmentsListFilter?.address}
 						type="text"
 						placeholder="Some Address 1, 1010 Vienna"
-						className="input input-bordered w-full "
+						className="input input-bordered w-full"
 						{...register("address", {})}
 					/>
 				</label>
-				<label className="input-group my-4 px-2">
-					<span>Price Min</span>
+				<label className="input-group my-4 px-2 max-w-[375px]">
+					<span className="px-[10px]">Price Min</span>
 					<input
 						defaultValue={apartmentsListFilter?.priceMin}
 						type="number"
 						placeholder="1000"
-						className="input input-bordered "
+						className="input input-bordered max-w-[100px]"
 						{...register("priceMin", {})}
 					/>
-					<span>Price Max</span>
+					<span className="px-[10px]">Price Max</span>
 					<input
 						defaultValue={apartmentsListFilter?.priceMax}
 						type="number"
 						placeholder="2000"
-						className="input input-bordered "
+						className="input input-bordered max-w-[100px]"
 						{...register("priceMax", {})}
 					/>
 				</label>
-				<label className="input-group my-4 px-2">
-					<span>Rooms Min</span>
+				<label className="input-group my-4 px-2 max-w-[375px]">
+					<span className="px-[10px]">Rooms Min</span>
 					<input
 						defaultValue={apartmentsListFilter?.roomMin}
 						type="number"
 						placeholder="1"
-						className="input input-bordered "
+						className="input input-bordered max-w-[100px]"
 						{...register("roomMin", {})}
 					/>
-					<span>Rooms Max</span>
+					<span className="px-[10px]">Rooms Max</span>
 					<input
 						defaultValue={apartmentsListFilter?.roomMax}
 						type="number"
 						placeholder="3"
-						className="input input-bordered "
+						className="input input-bordered max-w-[100px]"
 						{...register("roomMax", {})}
 					/>
 				</label>

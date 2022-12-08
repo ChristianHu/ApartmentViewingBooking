@@ -26,7 +26,7 @@ export default function Profile() {
 					<button 
 						className={
 							showMyBookings
-								? "flex w-[150px] place-content-center  px-[20px]"
+								? "flex w-[150px] place-content-center px-[20px]"
 								: "flex w-[150px] place-content-center px-[20px] font-extrabold underline"
 						}
 						onClick={handlePersonalData}>Personal Data</button>
