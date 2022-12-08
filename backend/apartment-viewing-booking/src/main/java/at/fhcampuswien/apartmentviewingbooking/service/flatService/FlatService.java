@@ -54,7 +54,7 @@ public class FlatService {
         flat.setDescription(flatRequest.getDescription());
         flat.setNumberOfRooms(flatRequest.getNumberOfRooms());
 
-        AddressRequest addressRequest =flatRequest.getAddress();
+       // AddressRequest addressRequest =flatRequest.getAddress();
 
 //        Address address=new Address();
 //        address.setCity(addressRequest.getCity());
@@ -68,7 +68,7 @@ public class FlatService {
       //  flat.setAddress(address);
 
 
-        Address address=addressService.createAddress(addressRequest);
+       // Address address=addressService.createAddress(addressRequest);
 
         //flat.setAddress(address);
 
