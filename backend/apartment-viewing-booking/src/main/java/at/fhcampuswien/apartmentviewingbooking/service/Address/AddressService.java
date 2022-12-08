@@ -16,11 +16,9 @@ public class AddressService {
     }
 
 
+    public Address createAddress(AddressRequest addressRequest) {
 
-    public Address createAddress(AddressRequest addressRequest){
-
-
-        Address address=new Address();
+        Address address = new Address();
         address.setCity(addressRequest.getCity());
         address.setBuildingNumber(addressRequest.getBuildingNumber());
         address.setCountry(addressRequest.getCountry());
@@ -28,7 +26,7 @@ public class AddressService {
         address.setRiseNumber(addressRequest.getRiseNumber());
         address.setState(addressRequest.getState());
         address.setStreet(addressRequest.getStreet());
-
+        address.setZipCode(addressRequest.getZipCode());
 
 
         return addressRepository.save(address);

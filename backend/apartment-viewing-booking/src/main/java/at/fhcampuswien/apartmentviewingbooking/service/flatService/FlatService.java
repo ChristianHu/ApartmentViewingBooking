@@ -18,12 +18,12 @@ public class FlatService {
 
     private FlatRepository flatRepository;
 
-    private AddressService addressService;
+    //private AddressService addressService;
 
     @Autowired
-    public FlatService(FlatRepository flatRepository, AddressService addressService) {
+    public FlatService(FlatRepository flatRepository) {
         this.flatRepository = flatRepository;
-        this.addressService = addressService;
+     //   this.addressService = addressService;
     }
 
     public Optional<Flat> getFlatByID(long flatId) {
@@ -47,31 +47,22 @@ public class FlatService {
     }
 
 
-    public Flat createFlat(FlatRequest flatRequest){
+    public Flat createFlat(FlatRequest flatRequest, AddressService addressService){
         Flat flat = new Flat();
         flat.setSize(flatRequest.getSize());
         flat.setPrice(flatRequest.getPrice());
         flat.setDescription(flatRequest.getDescription());
         flat.setNumberOfRooms(flatRequest.getNumberOfRooms());
 
-       // AddressRequest addressRequest =flatRequest.getAddress();
+        System.out.println();
+        System.out.println(flatRequest.getAddress());
 
-//        Address address=new Address();
-//        address.setCity(addressRequest.getCity());
-//        address.setBuildingNumber(addressRequest.getBuildingNumber());
-//        address.setCountry(addressRequest.getCountry());
-//        address.setFlatNumber(addressRequest.getFlatNumber());
-//        address.setRiseNumber(addressRequest.getRiseNumber());
-//        address.setState(addressRequest.getState());
-//        address.setStreet(addressRequest.getStreet());
-
-      //  flat.setAddress(address);
-
-
-
-       // Address address=addressService.createAddress(addressRequest);
-
-        //flat.setAddress(address);
+        try {
+            Address address = addressService.createAddress(flatRequest.getAddress());
+            flat.setAddress(address);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return flatRepository.save(flat);
     }

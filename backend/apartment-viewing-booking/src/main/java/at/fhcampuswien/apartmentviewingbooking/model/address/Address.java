@@ -22,6 +22,7 @@ public class Address {
     @Column(name = "address_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String street;
     private String buildingNumber;
     private String riseNumber;
@@ -30,6 +31,6 @@ public class Address {
     private String city;
     private String state;
     private String country;
-    @OneToOne(mappedBy = "address")
-    private Flat flat;
+//    @OneToOne(mappedBy = "address")
+//    private Flat flat;
 }
