@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import ComApartmentFacts from "./com-apartment-facts";
 import ComImageSlider from "./com-image-slider";
-import Image from "next/image";
 
 const ComApartmentCard = ({
 	propertyId,

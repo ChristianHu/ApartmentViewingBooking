@@ -12,6 +12,7 @@ const ComSidebarFilter = () => {
 		filter(data, (value, key) => {
 			value !== "" && (result[key] = value);
 		});
+		console.log(result);
 		setApartmentsListFilter(Object.keys(result).length === 0 ? null : result);
 	};
 
@@ -50,7 +51,7 @@ const ComSidebarFilter = () => {
 				<label className="input-group my-4 px-2">
 					<span>Rooms Min</span>
 					<input
-						defaultValue={apartmentsListFilter?.roomsMin}
+						defaultValue={apartmentsListFilter?.roomMin}
 						type="number"
 						placeholder="1"
 						className="input input-bordered "
@@ -58,7 +59,7 @@ const ComSidebarFilter = () => {
 					/>
 					<span>Rooms Max</span>
 					<input
-						defaultValue={apartmentsListFilter?.roomsMax}
+						defaultValue={apartmentsListFilter?.roomMax}
 						type="number"
 						placeholder="3"
 						className="input input-bordered "

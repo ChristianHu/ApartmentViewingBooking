@@ -1,11 +1,12 @@
+import ComApartmentAddCommentCard from "../../components/com-apartment-add-comment-card";
 import ComApartmentFacts from "../../components/com-apartment-facts";
 import ComCardComment from "../../components/com-card-comment";
 import ComImageSlider from "../../components/com-image-slider";
 import LayGeneral from "../../layouts/lay-general";
-import ComApartmentAddCommentCard from "../../components/com-apartment-add-comment-card";
 import { mockComments } from "../../mocks/mock-comments";
 
 export default function Details({ propertyId }) {
+	const apartmentsList = useRecoilValue(selectorStateApartmentsList);
 	const handleBook = () => {
 		console.log("TODO: show booking page");
 	};
@@ -55,7 +56,7 @@ export default function Details({ propertyId }) {
 						/>
 					</div>
 					<div>
-						<ComApartmentAddCommentCard/>
+						<ComApartmentAddCommentCard />
 					</div>
 					<div className="font-bold">Comments:</div>
 					<div className="my-[18px]">
@@ -76,7 +77,7 @@ export default function Details({ propertyId }) {
 	);
 }
 export async function getServerSideProps(context) {
-	const id = context.params.id;
+	const data = context.params.data;
 
-	return { props: { propertyId: id } };
+	return { props: { ...data } };
 }

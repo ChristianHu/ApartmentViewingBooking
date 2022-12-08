@@ -1,6 +1,5 @@
 import { filter, values } from "lodash";
 import { atom, selector } from "recoil";
-import { mockApartments } from "../mocks/mock-apartments";
 
 export const stateLogin = atom({
 	key: "stateLogin",
@@ -9,7 +8,7 @@ export const stateLogin = atom({
 
 export const stateApartmentsList = atom({
 	key: "stateApartmentsList",
-	default: mockApartments,
+	default: null,
 });
 export const stateApartmentsListFilter = atom({
 	key: "stateApartmentsListFilter",
@@ -20,7 +19,7 @@ const stateApartmentsListMapper = selector({
 	key: "stateApartmentsListMapper",
 	get: ({ get }) => {
 		const apartmentsList = get(stateApartmentsList);
-		return apartmentsList.map((apartment) => {
+		return apartmentsList?.map((apartment) => {
 			return {
 				propertyId: apartment.id,
 				propertyAddress: values(apartment.address).reduce((prev, current) => {
@@ -29,7 +28,7 @@ const stateApartmentsListMapper = selector({
 				propertyDescription: apartment.description,
 				propertyPrice: apartment.price,
 				propertySize: apartment.size,
-				propertyRoomNumber: apartment.size,
+				propertyRoomNumber: apartment.numberOfRooms,
 				propertyImages: [
 					"https://picsum.photos/200/200",
 					"https://placeimg.com/200/200/arch",
