@@ -26,7 +26,7 @@ export const utilRequestSender = (method, path, params = null, body = null, head
 			//...(localStorage.getItem('authorization') && { Authorization: localStorage.getItem('authorization') }),
 			...headers,
 		},
-		withCredentials: false,
+		withCredentials: true,
 
 		/*         transformRequest: [
             (data, headers) => {
