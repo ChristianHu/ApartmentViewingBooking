@@ -2,10 +2,10 @@ import { ErrorMessage } from "@hookform/error-message";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { constGen } from "../constants/const-gen";
-import { requestSender } from "../utils/util-fetch";
+import { utilRequestSender } from "../utils/util-fetch";
 
 const reqRegister = async (data, setter) => {
-	const res = await requestSender("POST", constGen.host + "/auth/signup", null, data);
+	const res = await utilRequestSender("POST", constGen.host + "/auth/signup", null, data);
 	setter(res.data);
 };
 

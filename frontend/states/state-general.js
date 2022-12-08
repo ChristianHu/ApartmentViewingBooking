@@ -1,4 +1,4 @@
-import { filter } from "lodash";
+import { filter, values } from "lodash";
 import { atom, selector } from "recoil";
 import { mockApartments } from "../mocks/mock-apartments";
 
@@ -15,10 +15,34 @@ export const stateApartmentsListFilter = atom({
 	key: "stateApartmentsListFilter",
 	default: null,
 });
+
+const stateApartmentsListMapper = selector({
+	key: "stateApartmentsListMapper",
+	get: ({ get }) => {
+		const apartmentsList = get(stateApartmentsList);
+		return apartmentsList.map((apartment) => {
+			return {
+				propertyId: apartment.id,
+				propertyAddress: values(apartment.address).reduce((prev, current) => {
+					return prev + " " + current;
+				}),
+				propertyDescription: apartment.description,
+				propertyPrice: apartment.price,
+				propertySize: apartment.size,
+				propertyRoomNumber: apartment.size,
+				propertyImages: [
+					"https://picsum.photos/200/200",
+					"https://placeimg.com/200/200/arch",
+					"https://loremflickr.com/200/200",
+				],
+			};
+		});
+	},
+});
 export const selectorStateApartmentsList = selector({
 	key: "selectorStateApartmentsList",
 	get: ({ get }) => {
-		const apartmentsList = get(stateApartmentsList);
+		const apartmentsList = get(stateApartmentsListMapper);
 		const apartmentsListFilter = get(stateApartmentsListFilter);
 		console.log("apartmentsListFilter", apartmentsListFilter);
 		if (apartmentsListFilter) {

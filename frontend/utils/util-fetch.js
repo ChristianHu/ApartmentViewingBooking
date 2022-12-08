@@ -11,7 +11,7 @@ import { has } from "lodash";
  * @param {*} body
  * @param {*} headers
  */
-export const requestSender = (method, path, params = null, body = null, headers = {}) => {
+export const utilRequestSender = (method, path, params = null, body = null, headers = {}) => {
 	if (method === "post" || method === "patch" || method === "put") {
 		if (!has(headers, "Content-Type")) headers = { ...headers, ...{ "Content-Type": "application/json" } };
 	}

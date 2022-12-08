@@ -45,7 +45,9 @@ const ComNav = () => {
 	return (
 		<div className="navbar bg-base-100">
 			<div className="flex-1">
-				<a className="btn btn-ghost normal-case text-xl">No More Homeless</a>
+				<Link href="/">
+					<button className="btn btn-ghost normal-case text-xl">No More Homeless</button>
+				</Link>
 			</div>
 			<div className="flex-none gap-2">{renderLogin()}</div>
 		</div>
