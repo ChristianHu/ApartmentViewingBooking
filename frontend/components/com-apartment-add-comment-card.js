@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 
 const ComApartmentAddCommentCard = () => {
-	const [rating, setRating] = useState(5)
+	const [rating, setRating] = useState(1)
 	const {
 		register,
 		handleSubmit,
@@ -12,25 +12,43 @@ const ComApartmentAddCommentCard = () => {
 		setRating(number)
 	};
 	const renderRatingStars = () => {
-		let result = []
-		for (let i = 0; i < 5; i++) {
-			if (rating === i) {
-				result.push(<input key={i} type="radio" name="rating-1" className="mask mask-star" checked />)
+		let result = [];
+		for (let i = 1; i < 6; i++) {
+			if (rating !== undefined && rating === i) {
+				result.push(
+					<input
+						key={i + 100}
+						name={"input-1"}
+						type="radio"
+						className="mask mask-star"
+						defaultChecked
+						readOnly
+					/>
+				);
 			} else {
-				result.push(<input key={i} type="radio" name="rating-1" className="mask mask-star" onClick={() => handleRating(i)}/>)
+				result.push(
+					<input
+						key={i + 100}
+						name={"input-1"}
+						readOnly
+						type="radio"
+						className="mask mask-star"
+						onClick={() => handleRating(i)}
+					/>
+				);
 			}
 		}
-		return result
+		return result;
 	};
 	
 	const onSubmit = (data) => {
 		// TODO: handle add comment
 		console.log("Submit test data:")
-		console.log(data)
+		console.log({...data, ...{rating: rating}})
 	};
 
 	return (
-		<div className="m-auto apartment-card flex flex-col rounded-[16px] bg-[#F2F2F2] px-[20px] w-5/6 md:w-3/5 my-6">
+		<div className="m-auto apartment-card flex flex-col rounded-[16px] bg-[#F2F2F2] px-[20px] my-6">
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="flex flex-col pt-[18px]">
 					<label className="pb-[4px]">Add your comment here:</label>

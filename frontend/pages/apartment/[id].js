@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ComApartmentFacts from "../../components/com-apartment-facts";
 import ComCardComment from "../../components/com-card-comment";
 import ComImageSlider from "../../components/com-image-slider";
@@ -7,42 +6,6 @@ import ComApartmentAddCommentCard from "../../components/com-apartment-add-comme
 import { mockComments } from "../../mocks/mock-comments";
 
 export default function Details({ propertyId }) {
-	const [rating, setRating] = useState(1);
-	const handleRating = (number) => {
-		setRating(number);
-		console.log(number);
-	};
-
-	const renderRatingStars = () => {
-		let result = [];
-		for (let i = 1; i < 6; i++) {
-			if (rating !== undefined && rating === i) {
-				result.push(
-					<input
-						key={i + 100}
-						name={"input-1"}
-						type="radio"
-						className="mask mask-star"
-						defaultChecked
-						readOnly
-					/>
-				);
-			} else {
-				result.push(
-					<input
-						key={i + 100}
-						name={"input-1"}
-						readOnly
-						type="radio"
-						className="mask mask-star"
-						onClick={() => handleRating(i)}
-					/>
-				);
-			}
-		}
-		return result;
-	};
-
 	const handleBook = () => {
 		console.log("TODO: show booking page");
 	};
@@ -94,16 +57,7 @@ export default function Details({ propertyId }) {
 					<div>
 						<ComApartmentAddCommentCard/>
 					</div>
-					<ul className="flex flex-row my-[18px]">
-						<li>
-							<h3 className="mr-[15px]">Rate this apartment: </h3>
-						</li>
-						<li>
-							<form>
-								<div className="rating"> {renderRatingStars()}</div>
-							</form>
-						</li>
-					</ul>
+					<div className="font-bold">Comments:</div>
 					<div className="my-[18px]">
 						{mockComments.map((comment, index) => {
 							return (

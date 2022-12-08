@@ -9,7 +9,7 @@ const ComCardComment = ({ rating, text, id }) => {
 					<svg
 						key={Math.random() * 1000}
 						aria-hidden="true"
-						className="w-5 h-5 text-yellow-400"
+						className="w-5 h-5 text-black-400"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 						xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@ const ComCardComment = ({ rating, text, id }) => {
 					<svg
 						key={i + id}
 						aria-hidden="true"
-						className="w-5 h-5 text-gray-300 dark:text-gray-500"
+						className="w-5 h-5 text-gray-300 dark:text-gray-300"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 						xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const ComCardComment = ({ rating, text, id }) => {
 		return result;
 	};
 	return (
-		<div className="flex flex-col bg-slate-200 my-3 rounded">
+		<div className="flex flex-col p-[20px] bg-[#F2F2F2] my-3 rounded-[16px]">
 			<div className="rating">{renderRatingStarsComment()}</div>
 			<div className="card-body">
 				<p>{text}</p>
