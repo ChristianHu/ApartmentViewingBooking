@@ -3,12 +3,16 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { constGen } from "../constants/const-gen";
 import { utilRequestSender } from "../utils/util-fetch";
+import {router} from "next/client";
 
 const reqRegister = async (data, setter) => {
 	try {
 		const res = await utilRequestSender("POST", constGen.host + "/auth/signup", null, data);
 		setter(res.data);
-		alert("Register successful");
+		//alert("Register successful");
+		if (confirm("Register successful")) {
+			router.push("/");
+		}
 	} catch (e) {
 		alert(e);
 	}
