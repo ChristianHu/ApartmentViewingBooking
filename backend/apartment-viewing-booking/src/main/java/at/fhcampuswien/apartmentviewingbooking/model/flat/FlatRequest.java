@@ -1,12 +1,13 @@
 package at.fhcampuswien.apartmentviewingbooking.model.flat;
 
-import at.fhcampuswien.apartmentviewingbooking.model.address.Address;
 import at.fhcampuswien.apartmentviewingbooking.model.address.AddressRequest;
 import io.swagger.annotations.ApiModel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+@Builder
 @Data
 @EqualsAndHashCode
 @ToString

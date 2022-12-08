@@ -4,7 +4,7 @@ import at.fhcampuswien.apartmentviewingbooking.model.comment.Comment;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserEntity;
 import at.fhcampuswien.apartmentviewingbooking.repository.CommentRepository;
-import at.fhcampuswien.apartmentviewingbooking.service.flatService.FlatService;
+import at.fhcampuswien.apartmentviewingbooking.service.flatservice.FlatService;
 import at.fhcampuswien.apartmentviewingbooking.service.userservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,11 @@ import java.util.Optional;
 
 @Service
 public class CommentService {
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
-    private FlatService flatService;
-    private UserService userService;
+    private final FlatService flatService;
+    private final UserService userService;
 
-    @Autowired
     public CommentService(CommentRepository commentRepository, FlatService flatService, UserService userService) {
         this.commentRepository = commentRepository;
         this.flatService = flatService;
@@ -27,7 +26,6 @@ public class CommentService {
     }
 
     public Optional<Comment> createComment(long userId, long flatId, int rating, String text) {
-        Optional<Comment> result;
         Comment comment = new Comment();
 
         Optional<UserEntity> userEntity = userService.getUserById(userId);
@@ -42,12 +40,11 @@ public class CommentService {
 
             commentRepository.save(comment);
 
-            result = Optional.of(comment);
+            return Optional.of(comment);
 
         } else {
-            result = null;
+           return Optional.empty();
         }
-        return result;
     }
 
 

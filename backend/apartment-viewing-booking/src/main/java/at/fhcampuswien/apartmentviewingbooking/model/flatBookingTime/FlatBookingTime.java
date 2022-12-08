@@ -34,7 +34,7 @@ public class FlatBookingTime {
     private Flat flat;
 
     @FutureOrPresent
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
     private LocalDateTime bookingDate;
 
     private boolean isAlreadyBooked;

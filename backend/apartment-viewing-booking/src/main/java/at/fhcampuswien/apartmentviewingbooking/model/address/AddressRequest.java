@@ -1,10 +1,12 @@
 package at.fhcampuswien.apartmentviewingbooking.model.address;
 
 import io.swagger.annotations.ApiModel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+@Builder
 @Data
 @EqualsAndHashCode
 @ToString
