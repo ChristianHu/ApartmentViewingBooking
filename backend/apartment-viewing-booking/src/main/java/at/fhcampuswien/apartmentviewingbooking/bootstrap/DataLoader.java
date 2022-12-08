@@ -2,7 +2,6 @@ package at.fhcampuswien.apartmentviewingbooking.bootstrap;
 
 import at.fhcampuswien.apartmentviewingbooking.model.address.AddressRequest;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.FlatRequest;
-import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserDto;
 import at.fhcampuswien.apartmentviewingbooking.service.FlatBookingTimesService.FlatBookingTimesService;
 import at.fhcampuswien.apartmentviewingbooking.service.flatservice.FlatService;
@@ -36,6 +35,7 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) {
         loadUsers();
         loadAddresses();
+        loadFlatTimes();
     }
 
 
@@ -246,6 +246,34 @@ public class DataLoader implements CommandLineRunner {
         flatService.createFlat(flat8);
         flatService.createFlat(flat9);
         flatService.createFlat(flat10);
+    }
+
+    private void loadFlatTimes() {
+        LocalDateTime time11 = LocalDateTime.parse("2023-01-10 10:00", formatter);
+        LocalDateTime time21 = LocalDateTime.parse("2023-01-10 11:00", formatter);
+        LocalDateTime time31 = LocalDateTime.parse("2023-01-11 17:00", formatter);
+        LocalDateTime time41 = LocalDateTime.parse("2023-01-11 18:00", formatter);
+        LocalDateTime time51 = LocalDateTime.parse("2023-01-12 19:00", formatter);
+        LocalDateTime time61 = LocalDateTime.parse("2023-01-13 19:00", formatter);
+        flatBookingTimesService.createFlatBookingTime(1, time11);
+        flatBookingTimesService.createFlatBookingTime(1, time21);
+        flatBookingTimesService.createFlatBookingTime(1, time31);
+        flatBookingTimesService.createFlatBookingTime(1, time41);
+        flatBookingTimesService.createFlatBookingTime(1, time51);
+        flatBookingTimesService.createFlatBookingTime(1, time61);
+
+        LocalDateTime time12 = LocalDateTime.parse("2023-01-10 10:00", formatter);
+        LocalDateTime time22 = LocalDateTime.parse("2023-01-10 11:00", formatter);
+        LocalDateTime time32 = LocalDateTime.parse("2023-01-11 17:00", formatter);
+        LocalDateTime time42 = LocalDateTime.parse("2023-01-11 18:00", formatter);
+        LocalDateTime time52 = LocalDateTime.parse("2023-01-12 19:00", formatter);
+        LocalDateTime time62 = LocalDateTime.parse("2023-01-13 19:00", formatter);
+        flatBookingTimesService.createFlatBookingTime(2, time12);
+        flatBookingTimesService.createFlatBookingTime(2, time22);
+        flatBookingTimesService.createFlatBookingTime(2, time32);
+        flatBookingTimesService.createFlatBookingTime(2, time42);
+        flatBookingTimesService.createFlatBookingTime(2, time52);
+        flatBookingTimesService.createFlatBookingTime(2, time62);
     }
 }
 

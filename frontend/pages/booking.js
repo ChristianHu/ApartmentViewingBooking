@@ -6,6 +6,9 @@ export default function Booking() {
 	const [showQrCode, setShowQrCode] = useState(false);
 	const [selectedDate, setSelectedDate] = useState(false);
 	const [selectedTime, setSelectedTime] = useState(false);
+	
+	const qrCodeValue = "test data"// TODO: replace this with real data
+	
 	const handleBooking = () => {
 		setShowQrCode(true);
 		// TODO: save booking
@@ -56,7 +59,7 @@ export default function Booking() {
 					<div className="m-auto mb-[20px] flex flex-col rounded-[16px] p-[20px] bg-[#F2F2F2]">
 						<div className="m-auto flex flex-row mb-[20px]">Your personal access code:</div>
 						<div className="m-auto flex flex-row w-[256px] h-[256px] bg-white">
-							<QRCode className="m-auto flex flex-row bg-white" value="Some random value"/>
+							<QRCode className="m-auto flex flex-row bg-white" value={qrCodeValue}/>
 						</div>
 						<button className="m-auto flex btn w-[256px] mt-[20px]" onClick={handleDownload}>Download</button>
 					</div>

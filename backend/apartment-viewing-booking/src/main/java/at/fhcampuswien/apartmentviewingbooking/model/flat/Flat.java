@@ -16,8 +16,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Builder
-@Data
-@ToString
+@Setter
+@Getter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

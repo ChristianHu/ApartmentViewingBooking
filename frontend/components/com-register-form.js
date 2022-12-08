@@ -5,8 +5,13 @@ import { constGen } from "../constants/const-gen";
 import { utilRequestSender } from "../utils/util-fetch";
 
 const reqRegister = async (data, setter) => {
-	const res = await utilRequestSender("POST", constGen.host + "/auth/signup", null, data);
-	setter(res.data);
+	try {
+		const res = await utilRequestSender("POST", constGen.host + "/auth/signup", null, data);
+		setter(res.data);
+		alert("Register successful");
+	} catch (e) {
+		alert(e);
+	}
 };
 
 const ComRegisterForm = () => {
@@ -147,7 +152,13 @@ const ComRegisterForm = () => {
 								: "h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px]"
 						}
 						type="password"
-						{...register("password", { required: "is required" })}
+						{...register("password", {
+							required: "is required",
+							pattern: {
+								value: /^.{8,}$/i,
+								message: "Minimum 8 chars",
+							},
+						})}
 					/>
 					<ErrorMessage
 						errors={errors}

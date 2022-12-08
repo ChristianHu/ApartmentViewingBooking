@@ -62,7 +62,7 @@ public class BookingController {
         if (booking.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(booking.get(), HttpStatus.FOUND);
+        return new ResponseEntity<>(booking.get(), HttpStatus.OK);
     }
 
     @DeleteMapping("/user/{bookingId}")

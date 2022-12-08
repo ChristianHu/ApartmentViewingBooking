@@ -1,10 +1,14 @@
 import Link from "next/link";
 import React from "react";
-import { useRecoilValue } from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 import { stateLogin } from "../states/state-general";
 const ComNav = () => {
 	const stateLoginVal = useRecoilValue(stateLogin);
-
+	const stateLoginSet = useSetRecoilState(stateLogin)
+	const handleLogout = () => {
+		stateLoginSet(null)
+	}
+	
 	const renderLogin = () => {
 		if (stateLoginVal) {
 			return (
@@ -18,17 +22,15 @@ const ComNav = () => {
 						tabIndex={0}
 						className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
 					>
+						<Link href="/profile">
+							<li>
+								<a className="justify-between">
+									Profile
+								</a>
+							</li>
+						</Link>
 						<li>
-							<a className="justify-between">
-								Profile
-								<span className="badge">New</span>
-							</a>
-						</li>
-						<li>
-							<a>Settings</a>
-						</li>
-						<li>
-							<a>Logout</a>
+							<a onClick={handleLogout}>Logout</a>
 						</li>
 					</ul>
 				</div>
