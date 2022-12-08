@@ -5,6 +5,8 @@ import ComImageSlider from "../../components/com-image-slider";
 import LayGeneral from "../../layouts/lay-general";
 import { mockComments } from "../../mocks/mock-comments";
 import Link from "next/link";
+import { useRecoilValue } from "recoil";
+import { selectorStateApartmentsList } from "../../states/state-general";
 
 export default function Details({ propertyId }) {
 	const apartmentsList = useRecoilValue(selectorStateApartmentsList);
