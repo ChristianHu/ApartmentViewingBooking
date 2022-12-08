@@ -1,26 +1,47 @@
+import { useState } from "react";
 import ComApartmentFacts from "../../components/com-apartment-facts";
+import ComCardComment from "../../components/com-card-comment";
 import ComImageSlider from "../../components/com-image-slider";
 import LayGeneral from "../../layouts/lay-general";
-import {useState} from "react";
+import { mockComments } from "../../mocks/mock-comments";
 
 export default function Details({ propertyId }) {
-	const [rating, setRating] = useState(0)
+	const [rating, setRating] = useState(1);
 	const handleRating = (number) => {
-		setRating(number)
-	}
-	
+		setRating(number);
+		console.log(number);
+	};
+
 	const renderRatingStars = () => {
-		let result = []
-		for (let i = 0; i < 5; i++) {
-			if (rating === i) {
-				result.push(<input key={i} type="radio" name="rating-1" className="mask mask-star" checked />)
+		let result = [];
+		for (let i = 1; i < 6; i++) {
+			if (rating !== undefined && rating === i) {
+				result.push(
+					<input
+						key={i + 100}
+						name={"input-1"}
+						type="radio"
+						className="mask mask-star"
+						defaultChecked
+						readOnly
+					/>
+				);
 			} else {
-				result.push(<input key={i} type="radio" name="rating-1" className="mask mask-star" onClick={() => handleRating(i)}/>)
+				result.push(
+					<input
+						key={i + 100}
+						name={"input-1"}
+						readOnly
+						type="radio"
+						className="mask mask-star"
+						onClick={() => handleRating(i)}
+					/>
+				);
 			}
 		}
-		return result
-	}
-	
+		return result;
+	};
+
 	const handleBook = () => {
 		console.log("TODO: show booking page");
 	};
@@ -57,20 +78,40 @@ export default function Details({ propertyId }) {
 						</p>
 					</div>
 					<div className="container-fluid my-[18px]">
-						<iframe title="google map" id="googleMaps" width="100%" height="500"
-								src="https://maps.google.com/maps?q=vienna,${place}=&z=13&ie=UTF8&iwloc=&output=embed"
-								frameBorder="0"
-								scrolling="no" marginHeight="0" marginWidth="0"/>
+						<iframe
+							title="google map"
+							id="googleMaps"
+							width="100%"
+							height="500"
+							src="https://maps.google.com/maps?q=vienna,${place}=&z=13&ie=UTF8&iwloc=&output=embed"
+							frameBorder="0"
+							scrolling="no"
+							marginHeight="0"
+							marginWidth="0"
+						/>
 					</div>
 					<ul className="flex flex-row my-[18px]">
 						<li>
 							<h3 className="mr-[15px]">Rate this apartment: </h3>
 						</li>
 						<li>
-							<div className="rating"> { renderRatingStars() }</div>
+							<form>
+								<div className="rating"> {renderRatingStars()}</div>
+							</form>
 						</li>
 					</ul>
-					<div className="my-[18px]">PLACEHOLDER for comment section</div>
+					<div className="my-[18px]">
+						{mockComments.map((comment, index) => {
+							return (
+								<ComCardComment
+									rating={comment.rating}
+									text={comment.text}
+									id={comment.id}
+									key={index}
+								></ComCardComment>
+							);
+						})}
+					</div>
 				</div>
 			</LayGeneral>
 		</div>
