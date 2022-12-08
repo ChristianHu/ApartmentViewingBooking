@@ -7,9 +7,13 @@ import { stateLogin } from "../states/state-general";
 import { utilRequestSender } from "../utils/util-fetch";
 
 const reqLogin = async (data, setter) => {
-	const res = await utilRequestSender("POST", constGen.host + "/auth/signin", null, data);
-	console.log(res);
-	setter(res.data);
+	try {
+		const res = await utilRequestSender("POST", constGen.host + "/auth/signin", null, data);
+		setter(res.data);
+		alert("Login successful");
+	} catch (e) {
+		alert(e);
+	}
 };
 
 const ComLoginForm = () => {
