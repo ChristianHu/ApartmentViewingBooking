@@ -17,5 +17,6 @@ public class FlatRequest {
     private double price;
     private String description;
     private AddressRequest address;
+    private double numberOfRooms;
 
 }

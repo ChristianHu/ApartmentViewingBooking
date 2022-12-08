@@ -52,6 +52,7 @@ public class FlatService {
         flat.setSize(flatRequest.getSize());
         flat.setPrice(flatRequest.getPrice());
         flat.setDescription(flatRequest.getDescription());
+        flat.setNumberOfRooms(flatRequest.getNumberOfRooms());
 
         AddressRequest addressRequest =flatRequest.getAddress();
 

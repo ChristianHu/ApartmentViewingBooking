@@ -35,6 +35,7 @@ public class Flat implements Serializable {
 
     private double size;
     private double price;
+    private double numberOfRooms;
     private String description;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "flat")
