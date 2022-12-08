@@ -26,41 +26,43 @@ public class BookingController {
     @PostMapping("/user/{userId}/flat/{flatId}")
     public ResponseEntity<Booking> bookFlat(@PathVariable long userId, @PathVariable long flatId, @RequestBody String bookingTime) {
 
-        try {
+        Optional<Booking> booking = bookingService.createBooking(userId, flatId, bookingTime);
 
+       if (booking.isEmpty()) {
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime localDateTime = LocalDateTime.parse(bookingTime, formatter);
-
-            Optional<Booking> booking = bookingService.createBooking(userId, flatId, localDateTime);
-
-            return booking.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
-        } catch (Exception e) {
-            System.out.println("\n Error:\n");
-            System.out.println(e);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+       return new ResponseEntity<>(booking.get(), HttpStatus.CREATED);
     }
 
     @GetMapping("{bookingId}")
     public ResponseEntity<Booking> getBookingByID(@PathVariable long bookingId) {
         Optional<Booking> booking = bookingService.getBookingByID(bookingId);
 
-        return booking.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        if (booking.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(booking.get(), HttpStatus.FOUND);
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Booking>> getALLBookingsByUser(@PathVariable long userId) {
-        List<Booking> bookings = bookingService.getALLBookingsByUser(userId);
+        Optional<List<Booking>> bookings = bookingService.getALLBookingsByUser(userId);
 
-        return new ResponseEntity<>(bookings, HttpStatus.OK);
+        if (bookings.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(bookings.get(), HttpStatus.OK);
     }
 
     @GetMapping("/flat/{flatID}")
     public ResponseEntity<Booking> getBookingByFlat(@PathVariable long flatID) {
         Optional<Booking> booking = bookingService.getBookingByFlat(flatID);
 
-        return booking.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        if (booking.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(booking.get(), HttpStatus.FOUND);
     }
 
     @DeleteMapping("/user/{bookingId}")

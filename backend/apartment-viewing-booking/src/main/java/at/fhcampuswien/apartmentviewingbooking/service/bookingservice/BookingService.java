@@ -8,22 +8,21 @@ import at.fhcampuswien.apartmentviewingbooking.repository.BookingRepository;
 import at.fhcampuswien.apartmentviewingbooking.service.FlatBookingTimesService.FlatBookingTimesService;
 import at.fhcampuswien.apartmentviewingbooking.service.flatservice.FlatService;
 import at.fhcampuswien.apartmentviewingbooking.service.userservice.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BookingService {
 
-    private BookingRepository bookingRepository;
-    private FlatService flatService;
-    private UserService userService;
-    private FlatBookingTimesService flatBookingTimesService;
+    private final BookingRepository bookingRepository;
+    private final FlatService flatService;
+    private final UserService userService;
+    private final FlatBookingTimesService flatBookingTimesService;
 
-    @Autowired
     public BookingService(BookingRepository bookingRepository, FlatService flatService, UserService userService, FlatBookingTimesService flatBookingTimesService) {
         this.bookingRepository = bookingRepository;
         this.flatService = flatService;
@@ -31,8 +30,12 @@ public class BookingService {
         this.flatBookingTimesService = flatBookingTimesService;
     }
 
-    public Optional<Booking> createBooking(long userId, long flatId, LocalDateTime bookingTime) {
-        Optional<Booking> result = null;
+    public Optional<Booking> createBooking(long userId, long flatId, String bookingTime) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(bookingTime, formatter);
+
+        Optional<Booking> result = Optional.empty();
         Booking booking = new Booking();
 
 
@@ -41,18 +44,18 @@ public class BookingService {
 
 
         if (userEntity.isPresent() && flatEntity.isPresent()) {
-            Optional<FlatBookingTime> flatBookingTimeEntity = flatBookingTimesService.getFBTbyFlatAndDateTime(flatEntity.get(), bookingTime);
+            Optional<FlatBookingTime> flatBookingTimeEntity = flatBookingTimesService.getFBTbyFlatAndDateTime(flatEntity.get(), localDateTime);
             if (flatBookingTimeEntity.isPresent() && !flatBookingTimeEntity.get().isAlreadyBooked()) {
                     booking.setFlat(flatEntity.get());
                     booking.setUser(userEntity.get());
 
-                    booking.setStartRentingDate(bookingTime);
+                    booking.setStartRentingDate(localDateTime);
 
                     bookingRepository.save(booking);
 
                     result = Optional.of(booking);
 
-                    flatBookingTimesService.bookingTime(flatId, bookingTime);
+                    flatBookingTimesService.bookingTime(flatId, localDateTime);
             }
         }
         return result;
@@ -63,48 +66,42 @@ public class BookingService {
     }
 
     public Optional<Booking> getBookingByFlat(long flatID) {
-        Optional<Booking> result;
 
         Optional<Flat> flat = flatService.getFlatByID(flatID);
 
         if (flat.isPresent()) {
 
-            result = bookingRepository.findByFlat(flat.get());
+            return bookingRepository.findByFlat(flat.get());
         } else {
-            result = null;
+           return Optional.empty();
         }
-
-        return result;
     }
 
     public Optional<Booking> getBookingByUser(long userID) {
-        Optional<Booking> result;
 
         Optional<UserEntity> user = userService.getUserById(userID);
 
         if (user.isPresent()) {
 
-            result = bookingRepository.findByUser(user.get());
+            return bookingRepository.findByUser(user.get());
         } else {
-            result = null;
+            return Optional.empty();
         }
-
-        return result;
     }
 
-    public List<Booking> getALLBookingsByUser(long userID) {
-        List<Booking> result;
+    public Optional<List<Booking>> getALLBookingsByUser(long userID) {
 
         Optional<UserEntity> user = userService.getUserById(userID);
-
-        if (user.isPresent()) {
-
-            result = bookingRepository.findAllByUser(user.get());
-        } else {
-            result = null;
+        if (user.isEmpty()) {
+            return Optional.empty();
         }
 
-        return result;
+        List<Booking> allByUser = bookingRepository.findAllByUser(user.get());
+        if (allByUser.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(allByUser);
     }
 
     public boolean deleteBooking(long id) {

@@ -33,7 +33,6 @@ public class FlatBookingTimesService {
             for (FlatBookingTime fbt : flatBookingTimes) {
                 if (fbt.getBookingDate().equals(localDateTime)) {
                     fbt.setAlreadyBooked(true);
-                    flatBookingTimesRepository.delete(fbt);
                     flatBookingTimesRepository.save(fbt);
                     flatBookingTime = Optional.of(fbt);
                 }

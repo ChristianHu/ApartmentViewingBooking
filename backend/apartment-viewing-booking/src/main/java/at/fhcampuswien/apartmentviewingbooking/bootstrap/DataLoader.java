@@ -2,11 +2,16 @@ package at.fhcampuswien.apartmentviewingbooking.bootstrap;
 
 import at.fhcampuswien.apartmentviewingbooking.model.address.AddressRequest;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.FlatRequest;
+import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserDto;
+import at.fhcampuswien.apartmentviewingbooking.service.FlatBookingTimesService.FlatBookingTimesService;
 import at.fhcampuswien.apartmentviewingbooking.service.flatservice.FlatService;
 import at.fhcampuswien.apartmentviewingbooking.service.userservice.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -16,10 +21,15 @@ public class DataLoader implements CommandLineRunner {
 
     private final UserService userService;
     private final FlatService flatService;
+    private final FlatBookingTimesService flatBookingTimesService;
 
-    public DataLoader(UserService userService, FlatService flatService) {
+    private static FlatRequest flat1, flat2, flat3, flat4, flat5, flat6, flat7, flat8, flat9, flat10;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    public DataLoader(UserService userService, FlatService flatService, FlatBookingTimesService flatBookingTimesService) {
         this.userService = userService;
         this.flatService = flatService;
+        this.flatBookingTimesService = flatBookingTimesService;
     }
 
     @Override
@@ -55,7 +65,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("linke-bahn")
                 .zipCode("1234")
                 .build();
-        FlatRequest flat1 = FlatRequest.builder()
+        flat1 = FlatRequest.builder()
                 .description("nothing")
                 .price(1000)
                 .size(68)
@@ -73,7 +83,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Friedhofstrasse")
                 .zipCode("4321")
                 .build();
-        FlatRequest flat2 = FlatRequest.builder()
+        flat2 = FlatRequest.builder()
                 .description("Beautiful house with big balcony!")
                 .price(1500)
                 .size(90)
@@ -91,7 +101,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Grazer Strasse")
                 .zipCode("5678")
                 .build();
-        FlatRequest flat3 = FlatRequest.builder()
+        flat3 = FlatRequest.builder()
                 .description("Modern apartment with great view!")
                 .price(1200)
                 .size(75)
@@ -109,7 +119,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Rudolfstrasse")
                 .zipCode("8765")
                 .build();
-        FlatRequest flat4 = FlatRequest.builder()
+        flat4 = FlatRequest.builder()
                 .description("Spacious flat with garden!")
                 .price(1500)
                 .size(65)
@@ -127,7 +137,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Innsbrucker Strasse")
                 .zipCode("7654")
                 .build();
-        FlatRequest flat5 = FlatRequest.builder()
+        flat5 = FlatRequest.builder()
                 .description("Spacious flat with big bedroom!")
                 .price(1400)
                 .size(85)
@@ -145,7 +155,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Dornbirner Strasse")
                 .zipCode("5432")
                 .build();
-        FlatRequest flat6 = FlatRequest.builder()
+        flat6 = FlatRequest.builder()
                 .description("Quiet flat with spacious balcony!")
                 .price(1000)
                 .size(75)
@@ -163,7 +173,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Salzburger Strasse")
                 .zipCode("3210")
                 .build();
-        FlatRequest flat7 = FlatRequest.builder()
+        flat7 = FlatRequest.builder()
                 .description("Nice flat with modern kitchen!")
                 .price(1200)
                 .size(80)
@@ -181,7 +191,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("St. Pöltener Strasse")
                 .zipCode("2109")
                 .build();
-        FlatRequest flat8 = FlatRequest.builder()
+        flat8 = FlatRequest.builder()
                 .description("Bright flat with garden!")
                 .price(1300)
                 .size(75)
@@ -199,7 +209,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Welser Strasse")
                 .zipCode("1098")
                 .build();
-        FlatRequest flat9 = FlatRequest.builder()
+        flat9 = FlatRequest.builder()
                 .description("Nice flat with big windows!")
                 .price(1100)
                 .size(70)
@@ -217,7 +227,7 @@ public class DataLoader implements CommandLineRunner {
                 .street("Bregenzer Strasse")
                 .zipCode("1234")
                 .build();
-        FlatRequest flat10 = FlatRequest.builder()
+        flat10 = FlatRequest.builder()
                 .description("Spacious flat with big balcony!")
                 .price(1000)
                 .size(85)
