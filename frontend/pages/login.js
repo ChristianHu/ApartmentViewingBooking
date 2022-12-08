@@ -18,15 +18,15 @@ export default function Login() {
 					<button
 						className={
 							showLogin 
-								? "flex px-[20px] font-extrabold underline" 
-								: "flex px-[20px]"
+								? "flex w-[150px] place-content-center px-[20px] font-extrabold underline" 
+								: "flex w-[150px] place-content-center px-[20px]"
 						}
 						onClick={handleLogin}>Login</button>
 					<button
 						className={
 							showLogin
-								? "flex px-[20px]"
-								: "flex px-[20px] font-extrabold underline"
+								? "flex w-[150px] place-content-center px-[20px]"
+								: "flex w-[150px] place-content-center px-[20px] font-extrabold underline"
 						}
 						onClick={handleRegister}>Register</button>
 				</div>

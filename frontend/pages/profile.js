@@ -19,15 +19,15 @@ export default function Profile() {
 					<button 
 						className={
 							showMyBookings
-								? "flex px-[20px] font-extrabold underline"
-								: "flex px-[20px]"
+								? "flex w-[150px] place-content-center px-[20px] font-extrabold underline"
+								: "flex w-[150px] place-content-center px-[20px]"
 						}
 						onClick={handleMyBookings}>My Bookings</button>
 					<button 
 						className={
 							showMyBookings
-								? "flex px-[20px]"
-								: "flex px-[20px] font-extrabold underline"
+								? "flex w-[150px] place-content-center  px-[20px]"
+								: "flex w-[150px] place-content-center px-[20px] font-extrabold underline"
 						}
 						onClick={handlePersonalData}>Personal Data</button>
 				</div>

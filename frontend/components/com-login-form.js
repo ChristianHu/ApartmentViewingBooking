@@ -66,8 +66,8 @@ const ComLoginForm = () => {
 						render={({ message }) => <small className="text-red-500">{message}</small>}
 					/>
 				</div>
-				<div className="flex flex-col pt-[18px]">
-					<button className="py-[18px] underline">Forgot Password?</button>
+				<div className="flex flex-col pt-[24px]">
+					<button className="pb-[24px] underline">Forgot Password?</button>
 					<input className="btn" type="submit" />
 				</div>
 			</form>
