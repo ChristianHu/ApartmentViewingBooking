@@ -26,7 +26,6 @@ public class CommentService {
     }
 
     public Optional<Comment> createComment(long userId, long flatId, int rating, String text) {
-        Optional<Comment> result;
         Comment comment = new Comment();
 
         Optional<UserEntity> userEntity = userService.getUserById(userId);
@@ -41,12 +40,11 @@ public class CommentService {
 
             commentRepository.save(comment);
 
-            result = Optional.of(comment);
+            return Optional.of(comment);
 
         } else {
-            result = null;
+           return Optional.empty();
         }
-        return result;
     }
 
 

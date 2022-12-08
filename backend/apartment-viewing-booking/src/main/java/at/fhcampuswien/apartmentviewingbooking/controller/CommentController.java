@@ -32,8 +32,10 @@ public class CommentController {
     @PostMapping()
     public ResponseEntity<Comment> createComment(@Valid @RequestBody CommentRequest commentRequest) {
         Optional<Comment> comment = commentService.createComment(commentRequest.getUserId(), commentRequest.getFlatId(), commentRequest.getRating(), commentRequest.getText());
-
-        return comment.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        if (comment.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(comment.get(), HttpStatus.CREATED);
     }
 
     @GetMapping("/flat/{flatID}")

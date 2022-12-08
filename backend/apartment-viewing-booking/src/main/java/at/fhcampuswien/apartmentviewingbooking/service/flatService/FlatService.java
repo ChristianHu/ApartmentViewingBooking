@@ -1,13 +1,11 @@
-package at.fhcampuswien.apartmentviewingbooking.service.flatService;
+package at.fhcampuswien.apartmentviewingbooking.service.flatservice;
 
 import at.fhcampuswien.apartmentviewingbooking.model.address.Address;
-import at.fhcampuswien.apartmentviewingbooking.model.address.AddressRequest;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
 import at.fhcampuswien.apartmentviewingbooking.model.flat.FlatRequest;
 import at.fhcampuswien.apartmentviewingbooking.model.flatBookingTime.FlatBookingTime;
 import at.fhcampuswien.apartmentviewingbooking.repository.FlatRepository;
 import at.fhcampuswien.apartmentviewingbooking.service.Address.AddressService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,30 +14,29 @@ import java.util.Optional;
 @Service
 public class FlatService {
 
-    private FlatRepository flatRepository;
+    private final FlatRepository flatRepository;
 
-    private AddressService addressService;
+    private final AddressService addressService;
 
-    @Autowired
-    public FlatService(FlatRepository flatRepository,AddressService addressService) {
+    public FlatService(FlatRepository flatRepository, AddressService addressService) {
         this.flatRepository = flatRepository;
-       this.addressService = addressService;
+        this.addressService = addressService;
     }
 
     public Optional<Flat> getFlatByID(long flatId) {
         return flatRepository.findById(flatId);
     }
 
-    public List<Flat> getAllFlats(){
+    public List<Flat> getAllFlats() {
         return flatRepository.findAll();
     }
 
 
     public Optional<List<FlatBookingTime>> getFlatBookingTimesByID(long flatId) {
         Optional<List<FlatBookingTime>> result = null;
-        Optional<Flat> optionalFlat =flatRepository.findById(flatId);
+        Optional<Flat> optionalFlat = flatRepository.findById(flatId);
 
-        if(optionalFlat.isPresent()){
+        if (optionalFlat.isPresent()) {
             result = Optional.ofNullable(optionalFlat.get().getAvaiableBookingTimes());
         }
 
@@ -47,7 +44,7 @@ public class FlatService {
     }
 
 
-    public Flat createFlat(FlatRequest flatRequest){
+    public Flat createFlat(FlatRequest flatRequest) {
         Flat flat = new Flat();
         flat.setSize(flatRequest.getSize());
         flat.setPrice(flatRequest.getPrice());
@@ -59,8 +56,8 @@ public class FlatService {
 
         try {
             Address address = addressService.createAddress(flatRequest.getAddress());
-            flat.setAddress(address);
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
