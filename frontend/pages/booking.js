@@ -7,20 +7,20 @@ export default function Booking() {
 	const [selectedDate, setSelectedDate] = useState(false);
 	const [selectedTime, setSelectedTime] = useState(false);
 	const handleBooking = () => {
+		setShowQrCode(true);
+		// TODO: save booking
 		console.log(selectedDate)
 		console.log(selectedTime)
-		setShowQrCode(true);
 	};
 	const handleDownload = () => {
-		console.log("Handle download...")
-		// TODO: implement download functionality
+		window.print()
 	}
 	const availableDates = [new Date().toDateString(), new Date().toDateString(), new Date().toDateString()];// TODO: replace placeholder values
 	const availableTimes = ["10:00 - 10:30", "11:00 - 11:30", "12:00 - 12:30", "13:00 - 13:30"]
 		
 	return (
 		<LayGeneral>
-			<div className="md:m-auto md:w-2/5  m-[20px]">
+			<div className="md:m-auto max-w-[400px] m-[20px]">
 				<h1 className="mb-[20px]">Placeholder for address</h1>
 				<div className="my-[10px]">
 					<select 

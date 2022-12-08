@@ -1,30 +1,13 @@
 import ComApartmentFacts from "../../components/com-apartment-facts";
 import ComImageSlider from "../../components/com-image-slider";
 import LayGeneral from "../../layouts/lay-general";
-import {useState} from "react";
+import ComApartmentAddCommentCard from "../../components/com-apartment-add-comment-card";
 
 export default function Details({ propertyId }) {
-	const [rating, setRating] = useState(0)
-	const handleRating = (number) => {
-		setRating(number)
-	}
-	
-	const renderRatingStars = () => {
-		let result = []
-		for (let i = 0; i < 5; i++) {
-			if (rating === i) {
-				result.push(<input key={i} type="radio" name="rating-1" className="mask mask-star" checked />)
-			} else {
-				result.push(<input key={i} type="radio" name="rating-1" className="mask mask-star" onClick={() => handleRating(i)}/>)
-			}
-		}
-		return result
-	}
-	
 	const handleBook = () => {
 		console.log("TODO: show booking page");
 	};
-
+	
 	return (
 		<div>
 			<LayGeneral>
@@ -62,15 +45,9 @@ export default function Details({ propertyId }) {
 								frameBorder="0"
 								scrolling="no" marginHeight="0" marginWidth="0"/>
 					</div>
-					<ul className="flex flex-row my-[18px]">
-						<li>
-							<h3 className="mr-[15px]">Rate this apartment: </h3>
-						</li>
-						<li>
-							<div className="rating"> { renderRatingStars() }</div>
-						</li>
-					</ul>
-					<div className="my-[18px]">PLACEHOLDER for comment section</div>
+				</div>
+				<div>
+					<ComApartmentAddCommentCard/>
 				</div>
 			</LayGeneral>
 		</div>
