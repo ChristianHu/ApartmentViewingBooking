@@ -15,9 +15,21 @@ export default function Profile() {
 	return (
 		<div>
 			<LayGeneral>
-				<div>
-					<button onClick={handleMyBookings}>My Bookings</button>
-					<button onClick={handlePersonalData}>Personal Data</button>
+				<div className="m-auto flex flex-row w-[300px]">
+					<button 
+						className={
+							showMyBookings
+								? "flex px-[20px] font-extrabold underline"
+								: "flex px-[20px]"
+						}
+						onClick={handleMyBookings}>My Bookings</button>
+					<button 
+						className={
+							showMyBookings
+								? "flex px-[20px]"
+								: "flex px-[20px] font-extrabold underline"
+						}
+						onClick={handlePersonalData}>Personal Data</button>
 				</div>
 				<div>
 					{showMyBookings ? <div>
