@@ -56,7 +56,12 @@ export default function Details({ propertyId }) {
 							labore et dolore magna aliqua.
 						</p>
 					</div>
-					<div className="my-[18px]">PLACEHOLDER for map</div>
+					<div className="container-fluid my-[18px]">
+						<iframe title="google map" id="googleMaps" width="100%" height="500"
+								src="https://maps.google.com/maps?q=vienna,${place}=&z=13&ie=UTF8&iwloc=&output=embed"
+								frameBorder="0"
+								scrolling="no" marginHeight="0" marginWidth="0"/>
+					</div>
 					<ul className="flex flex-row my-[18px]">
 						<li>
 							<h3 className="mr-[15px]">Rate this apartment: </h3>
