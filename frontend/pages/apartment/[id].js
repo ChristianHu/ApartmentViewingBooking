@@ -1,10 +1,11 @@
 import { values } from "lodash";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import ReactModal from "react-modal";
 import ComApartmentAddCommentCard from "../../components/com-apartment-add-comment-card";
 import ComApartmentFacts from "../../components/com-apartment-facts";
 import ComCardComment from "../../components/com-card-comment";
 import ComImageSlider from "../../components/com-image-slider";
+import ComModalBooking from "../../components/com-modal-booking";
 import { constGen } from "../../constants/const-gen";
 import LayGeneral from "../../layouts/lay-general";
 import { utilRequestSender } from "../../utils/util-fetch";
@@ -16,14 +17,16 @@ const reqFlat = async (data, setter) => {
 };
 export default function Details({ propertyId }) {
 	const [apartment, setApartment] = useState(null);
-	const handleBook = () => {
-		// TODO: forward flat infos to booking page
-	};
+	const [showModal, setShowModal] = useState(false);
 
 	console.log(apartment);
 	useEffect(() => {
 		propertyId && reqFlat(propertyId, setApartment);
 	}, [propertyId]);
+
+	const handleBook = () => {
+		setShowModal(!showModal);
+	};
 
 	return (
 		<div>
@@ -39,11 +42,17 @@ export default function Details({ propertyId }) {
 							]}
 						/>
 					</div>
-					<Link href="/booking">
-						<button className="flex flex-row m-auto btn px-[70px]" onClick={handleBook}>
-							Book
-						</button>
-					</Link>
+
+					<button className="flex flex-row m-auto btn px-[70px]" onClick={handleBook}>
+						Book
+					</button>
+					<ReactModal ariaHideApp={false} isOpen={showModal} contentLabel="Minimal Modal Example">
+						<>
+							<button onClick={handleBook}>Close Modal</button>
+							<ComModalBooking {...apartment}></ComModalBooking>
+						</>
+					</ReactModal>
+
 					<ComApartmentFacts
 						className="my-[18px]"
 						propertyAddress={

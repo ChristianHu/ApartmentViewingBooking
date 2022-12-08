@@ -1,4 +1,5 @@
 import { ErrorMessage } from "@hookform/error-message";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
@@ -6,17 +7,20 @@ import { constGen } from "../constants/const-gen";
 import { stateLogin } from "../states/state-general";
 import { utilRequestSender } from "../utils/util-fetch";
 
-const reqLogin = async (data, setter) => {
+const reqLogin = async (data, setter, router) => {
 	try {
 		const res = await utilRequestSender("POST", constGen.host + "/auth/signin", null, data);
 		setter(res.data);
-		alert("Login successful");
+		if (confirm("Login successful")) {
+			router.push("/");
+		}
 	} catch (e) {
 		alert(e);
 	}
 };
 
 const ComLoginForm = () => {
+	const router = useRouter();
 	const setLogin = useSetRecoilState(stateLogin);
 	const {
 		register,
@@ -24,7 +28,7 @@ const ComLoginForm = () => {
 		formState: { errors },
 	} = useForm();
 	const onSubmit = (data) => {
-		reqLogin(data, setLogin);
+		reqLogin(data, setLogin, router);
 	};
 
 	return (

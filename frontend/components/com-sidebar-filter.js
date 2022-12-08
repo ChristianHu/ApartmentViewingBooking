@@ -17,7 +17,7 @@ const ComSidebarFilter = () => {
 	};
 
 	return (
-		<div className="drawer-side m-auto flex flex-row mb-[20px] max-w-[375px]">
+		<div className="drawer-side flex flex-row  max-w-[375px]">
 			<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<label className="input-group my-4 px-2 max-w-[375px]">
