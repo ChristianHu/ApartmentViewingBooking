@@ -9,8 +9,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-@Data
-@ToString
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

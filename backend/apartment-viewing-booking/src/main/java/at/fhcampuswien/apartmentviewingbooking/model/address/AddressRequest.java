@@ -2,14 +2,14 @@ package at.fhcampuswien.apartmentviewingbooking.model.address;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 @Builder
-@Data
+@Setter
+@Getter
 @EqualsAndHashCode
-@ToString
 @ApiModel(description = "All details about the Addres requests.")
 public class AddressRequest {
     private String street;

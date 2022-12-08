@@ -14,8 +14,8 @@ import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDateTime;
 
 @Builder
-@Data
-@ToString
+@Setter
+@Getter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

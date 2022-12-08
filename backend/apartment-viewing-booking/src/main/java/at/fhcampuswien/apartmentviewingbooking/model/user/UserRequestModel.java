@@ -1,16 +1,16 @@
 package at.fhcampuswien.apartmentviewingbooking.model.user;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Data
+@Setter
+@Getter
 @EqualsAndHashCode
-@ToString
 public class UserRequestModel {
     @NotNull(message = "First name cannot be null")
     @Size(min = 2, message = "First name must not be less than two characters")

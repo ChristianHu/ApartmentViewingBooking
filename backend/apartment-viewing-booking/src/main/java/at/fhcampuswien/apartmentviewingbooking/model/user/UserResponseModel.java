@@ -1,15 +1,15 @@
 package at.fhcampuswien.apartmentviewingbooking.model.user;
 
 import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode
-@ToString
 public class UserResponseModel {
     private long id;
     private String firstName;

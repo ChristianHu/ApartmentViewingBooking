@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -46,13 +48,19 @@ public class BookingController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Booking>> getALLBookingsByUser(@PathVariable long userId) {
+    public ResponseEntity<Map<Long, Booking>> getALLBookingsByUser(@PathVariable long userId) {
         Optional<List<Booking>> bookings = bookingService.getALLBookingsByUser(userId);
 
         if (bookings.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(bookings.get(), HttpStatus.OK);
+        Map<Long, Booking> mapBookings = new HashMap<>();
+
+        for (Booking booking : bookings.get()) {
+            mapBookings.put(booking.getFlat().getId(), booking);
+        }
+
+        return new ResponseEntity<>(mapBookings, HttpStatus.OK);
     }
 
     @GetMapping("/flat/{flatID}")

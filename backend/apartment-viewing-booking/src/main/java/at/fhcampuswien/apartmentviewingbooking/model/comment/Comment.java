@@ -13,8 +13,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @Builder
-@Data
-@ToString
+@Setter
+@Getter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

@@ -3,8 +3,8 @@ package at.fhcampuswien.apartmentviewingbooking.model.user;
 import at.fhcampuswien.apartmentviewingbooking.model.booking.Booking;
 import at.fhcampuswien.apartmentviewingbooking.model.comment.Comment;
 import io.swagger.annotations.ApiModel;
-import lombok.Data;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,8 +12,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-@ToString
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 @ApiModel(description = "All details about the users.")

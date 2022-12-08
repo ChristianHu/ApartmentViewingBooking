@@ -17,8 +17,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Builder
-@ToString
-@Data
+@Setter
+@Getter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

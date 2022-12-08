@@ -2,15 +2,12 @@ package at.fhcampuswien.apartmentviewingbooking.model.flat;
 
 import at.fhcampuswien.apartmentviewingbooking.model.address.AddressRequest;
 import io.swagger.annotations.ApiModel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 @Builder
-@Data
+@Setter
+@Getter
 @EqualsAndHashCode
-@ToString
 @ApiModel(description = "All details about the flat requests.")
 public class FlatRequest {
 
