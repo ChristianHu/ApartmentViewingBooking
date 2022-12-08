@@ -4,10 +4,11 @@ import ComImageSlider from "../../components/com-image-slider";
 import LayGeneral from "../../layouts/lay-general";
 import ComApartmentAddCommentCard from "../../components/com-apartment-add-comment-card";
 import { mockComments } from "../../mocks/mock-comments";
+import Link from "next/link";
 
 export default function Details({ propertyId }) {
 	const handleBook = () => {
-		console.log("TODO: show booking page");
+		// TODO: forward flat infos to booking page
 	};
 
 	return (
@@ -24,9 +25,11 @@ export default function Details({ propertyId }) {
 							]}
 						/>
 					</div>
-					<button className="flex flex-row m-auto btn px-[70px]" onClick={handleBook}>
-						Book
-					</button>
+					<Link href="/booking">
+						<button className="flex flex-row m-auto btn px-[70px]" onClick={handleBook}>
+							Book
+						</button>
+					</Link>
 					<ComApartmentFacts
 						className="my-[18px]"
 						propertyAddress={propertyId}
