@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import LayGeneral from "../layouts/lay-general";
+import QRCode from "react-qr-code";
 
 export default function Booking() {
 	const [showQrCode, setShowQrCode] = useState(false);
@@ -19,11 +20,11 @@ export default function Booking() {
 		
 	return (
 		<LayGeneral>
-			<div className="m-auto w-2/5">
+			<div className="md:m-auto md:w-2/5  m-[20px]">
 				<h1 className="mb-[20px]">Placeholder for address</h1>
 				<div className="my-[10px]">
 					<select 
-						className="h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px] w-full"
+						className="h-[50px] rounded-[8px] bg-[#F2F2F2] p-[12px] w-full"
 						onChange={e => setSelectedDate(e.target.value)}>
 						{availableDates.map((value) => (
 							<option value={value} key={value}>{value}</option>
@@ -32,25 +33,34 @@ export default function Booking() {
 				</div>
 				<div className="my-[10px]">
 					<select
-						className="h-[40px] rounded-[8px] bg-[#F2F2F2] p-[12px] w-full"
+						className="h-[50px] rounded-[8px] bg-[#F2F2F2] p-[12px] w-full"
 						onChange={e => setSelectedTime(e.target.value)}>
 						{availableTimes.map((value) => (
 							<option value={value} key={value}>{value}</option>
 						))}
 					</select>
 				</div>
-				<div className="my-[10px]">{ showQrCode ? <div>Show qr code</div> : <div>Do not show qr code</div> }</div>
 				<div>
-					<button className="m-auto flex btn px-[70px] mb-[20px]" onClick={handleBooking}>Book</button>
+					<button onClick={handleBooking}
+							className={
+								showQrCode
+									? "m-auto flex btn w-[256px] mb-[20px] btn-disabled"
+									: "m-auto flex btn w-[256px] mb-[20px]"
+							}
+					>Book</button>
 				</div>
-				<div className="m-auto mb-[20px] flex flex-row">
-					<h1 className="m-auto flex flex-row">Booking successful!</h1>
-				</div>
-				<div className="m-auto mb-[20px] flex flex-col rounded-[16px] p-[20px] bg-[#F2F2F2]">
-					<div className="m-auto flex flex-row mb-[20px]">Your personal access code:</div>
-					<div className="m-auto flex flex-row w-[200px] h-[200px] bg-white">QR Code placeholder</div>
-					<button className="m-auto flex btn px-[70px] mt-[20px]" onClick={handleDownload}>Download</button>
-				</div>
+				{showQrCode ? <div>
+					<div className="m-auto mb-[20px] flex flex-row">
+						<h1 className="m-auto flex flex-row">Booking successful!</h1>
+					</div>
+					<div className="m-auto mb-[20px] flex flex-col rounded-[16px] p-[20px] bg-[#F2F2F2]">
+						<div className="m-auto flex flex-row mb-[20px]">Your personal access code:</div>
+						<div className="m-auto flex flex-row w-[256px] h-[256px] bg-white">
+							<QRCode className="m-auto flex flex-row bg-white" value="Some random value"/>
+						</div>
+						<button className="m-auto flex btn w-[256px] mt-[20px]" onClick={handleDownload}>Download</button>
+					</div>
+				</div> : ''}
 			</div>
 		</LayGeneral>
 	);
