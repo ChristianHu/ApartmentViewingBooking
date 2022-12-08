@@ -14,9 +14,21 @@ export default function Login() {
 	return (
 		<LayGeneral>
 			<div>
-				<div>
-					<button onClick={handleLogin}>Login</button>
-					<button onClick={handleRegister}>Register</button>
+				<div className="m-auto flex flex-row w-[300px]">
+					<button
+						className={
+							showLogin 
+								? "flex px-[20px] font-extrabold underline" 
+								: "flex px-[20px]"
+						}
+						onClick={handleLogin}>Login</button>
+					<button
+						className={
+							showLogin
+								? "flex px-[20px]"
+								: "flex px-[20px] font-extrabold underline"
+						}
+						onClick={handleRegister}>Register</button>
 				</div>
 				<div>{showLogin ? <ComLoginForm /> : <ComRegisterForm />}</div>
 			</div>
