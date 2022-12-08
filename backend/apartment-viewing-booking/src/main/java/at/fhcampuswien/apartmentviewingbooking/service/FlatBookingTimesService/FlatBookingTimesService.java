@@ -26,9 +26,10 @@ public class FlatBookingTimesService {
 
 
 
-    public FlatBookingTime createFlatBookingTime(Flat flat, LocalDateTime localDateTime){
+    public FlatBookingTime createFlatBookingTime(long flatId, LocalDateTime localDateTime){
         FlatBookingTime flatBookingTime = new FlatBookingTime();
-        flatBookingTime.setFlat(flat);
+        Optional<Flat> flatByID = flatService.getFlatByID(flatId);
+        flatBookingTime.setFlat(flatByID.get());
         flatBookingTime.setBookingDate(localDateTime);
         flatBookingTime.setAlreadyBooked(false);
 

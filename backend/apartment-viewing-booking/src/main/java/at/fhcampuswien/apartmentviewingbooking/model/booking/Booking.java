@@ -1,7 +1,6 @@
 package at.fhcampuswien.apartmentviewingbooking.model.booking;
 
 import at.fhcampuswien.apartmentviewingbooking.model.flat.Flat;
-import at.fhcampuswien.apartmentviewingbooking.model.image.CodeImage;
 import at.fhcampuswien.apartmentviewingbooking.model.user.UserEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,14 +36,8 @@ public class Booking implements Serializable {
     private Long id;
 
     @FutureOrPresent
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
     private LocalDateTime startRentingDate;
-
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "booking_id", referencedColumnName = "codeImage_id")
-    private CodeImage codeImage;
-
 
     @NotNull(message = "Unknown User")
     @ManyToOne(fetch = FetchType.LAZY)
