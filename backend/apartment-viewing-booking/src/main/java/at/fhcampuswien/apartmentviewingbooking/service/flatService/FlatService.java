@@ -18,12 +18,12 @@ public class FlatService {
 
     private FlatRepository flatRepository;
 
-    //private AddressService addressService;
+    private AddressService addressService;
 
     @Autowired
-    public FlatService(FlatRepository flatRepository) {
+    public FlatService(FlatRepository flatRepository,AddressService addressService) {
         this.flatRepository = flatRepository;
-     //   this.addressService = addressService;
+       this.addressService = addressService;
     }
 
     public Optional<Flat> getFlatByID(long flatId) {
@@ -47,7 +47,7 @@ public class FlatService {
     }
 
 
-    public Flat createFlat(FlatRequest flatRequest, AddressService addressService){
+    public Flat createFlat(FlatRequest flatRequest){
         Flat flat = new Flat();
         flat.setSize(flatRequest.getSize());
         flat.setPrice(flatRequest.getPrice());

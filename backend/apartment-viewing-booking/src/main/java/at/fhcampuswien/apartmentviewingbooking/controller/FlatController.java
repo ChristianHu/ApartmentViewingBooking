@@ -80,7 +80,7 @@ public class FlatController {
 
 
         try {
-            return new ResponseEntity<Flat>(flatService.createFlat(flatRequest, addressService), HttpStatus.OK);
+            return new ResponseEntity<Flat>(flatService.createFlat(flatRequest), HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("\n Error:\n");
             System.out.println(e);
