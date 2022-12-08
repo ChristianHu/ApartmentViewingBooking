@@ -4,7 +4,7 @@ import ComApartmentCard from "../components/com-apartment-card";
 import ComSidebarFilter from "../components/com-sidebar-filter";
 import { constGen } from "../constants/const-gen";
 import { LaySidebarLeft } from "../layouts/lay-sidebar-left";
-import {selectorStateApartmentsList, stateApartmentsList, stateLogin} from "../states/state-general";
+import { selectorStateApartmentsList, stateApartmentsList, stateLogin } from "../states/state-general";
 import { utilRequestSender } from "../utils/util-fetch";
 
 const reqFlats = async (data, setter) => {
@@ -23,10 +23,13 @@ export default function Home() {
 	return (
 		<div>
 			<LaySidebarLeft sidebar={<ComSidebarFilter></ComSidebarFilter>}>
-				
-				{loginState&& apartmentsList ? apartmentsList.map((apartment, index) => (
-					<ComApartmentCard key={index} {...apartment} />
-				)) : <p>You need to login!</p>}
+				{
+					/*loginState&&*/ apartmentsList ? (
+						apartmentsList.map((apartment, index) => <ComApartmentCard key={index} {...apartment} />)
+					) : (
+						<p>You need to login!</p>
+					)
+				}
 			</LaySidebarLeft>
 		</div>
 	);

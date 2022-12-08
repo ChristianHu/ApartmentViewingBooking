@@ -1,18 +1,29 @@
+import { values } from "lodash";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import ComApartmentAddCommentCard from "../../components/com-apartment-add-comment-card";
 import ComApartmentFacts from "../../components/com-apartment-facts";
 import ComCardComment from "../../components/com-card-comment";
 import ComImageSlider from "../../components/com-image-slider";
+import { constGen } from "../../constants/const-gen";
 import LayGeneral from "../../layouts/lay-general";
-import { mockComments } from "../../mocks/mock-comments";
-import Link from "next/link";
-import { useRecoilValue } from "recoil";
-import { selectorStateApartmentsList } from "../../states/state-general";
+import { utilRequestSender } from "../../utils/util-fetch";
 
+const reqFlat = async (data, setter) => {
+	const res = await utilRequestSender("GET", constGen.host + "/flats/" + data);
+	console.log(res);
+	setter(res.data);
+};
 export default function Details({ propertyId }) {
-	const apartmentsList = useRecoilValue(selectorStateApartmentsList);
+	const [apartment, setApartment] = useState(null);
 	const handleBook = () => {
 		// TODO: forward flat infos to booking page
 	};
+
+	console.log(apartment);
+	useEffect(() => {
+		propertyId && reqFlat(propertyId, setApartment);
+	}, [propertyId]);
 
 	return (
 		<div>
@@ -35,17 +46,20 @@ export default function Details({ propertyId }) {
 					</Link>
 					<ComApartmentFacts
 						className="my-[18px]"
-						propertyAddress={propertyId}
-						propertyRoomNumber={propertyId}
-						propertySize={"Test"}
-						propertyPrice={"Test"}
+						propertyAddress={
+							apartment
+								? values(apartment.address).reduce((prev, current) => {
+										return prev + " " + current;
+								  })
+								: null
+						}
+						propertyRoomNumber={apartment ? apartment.numberOfRooms : null}
+						propertySize={apartment ? apartment.size : null}
+						propertyPrice={apartment ? apartment.price : null}
 					/>
 					<div className="rounded-[16px] bg-[#F2F2F2] p-[18px]">
 						<h1 className="">Headline</h1>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-							labore et dolore magna aliqua.
-						</p>
+						<p>{apartment ? apartment.description : null}</p>
 					</div>
 					<div className="container-fluid my-[18px]">
 						<iframe
@@ -53,7 +67,15 @@ export default function Details({ propertyId }) {
 							id="googleMaps"
 							width="100%"
 							height="500"
-							src="https://maps.google.com/maps?q=vienna,${place}=&z=13&ie=UTF8&iwloc=&output=embed"
+							src={
+								"https://maps.google.com/maps?q=" +
+								apartment?.address.city +
+								"," +
+								apartment?.address.street +
+								"," +
+								apartment?.address.flatNumber +
+								"=&z=13&ie=UTF8&iwloc=&output=embed"
+							}
 							frameBorder="0"
 							scrolling="no"
 							marginHeight="0"
@@ -61,11 +83,11 @@ export default function Details({ propertyId }) {
 						/>
 					</div>
 					<div>
-						<ComApartmentAddCommentCard />
+						<ComApartmentAddCommentCard flatId={propertyId} />
 					</div>
 					<div className="font-bold">Comments:</div>
 					<div className="my-[18px]">
-						{mockComments.map((comment, index) => {
+						{apartment?.comments.map((comment, index) => {
 							return (
 								<ComCardComment
 									rating={comment.rating}
@@ -82,7 +104,7 @@ export default function Details({ propertyId }) {
 	);
 }
 export async function getServerSideProps(context) {
-	const data = context.params.data;
+	const id = context.params.id;
 
-	return { props: { ...data } };
+	return { props: { propertyId: id } };
 }

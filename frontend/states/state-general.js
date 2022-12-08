@@ -1,4 +1,4 @@
-import { filter, values } from "lodash";
+import { filter } from "lodash";
 import { atom, selector } from "recoil";
 
 export const stateLogin = atom({
@@ -22,9 +22,14 @@ const stateApartmentsListMapper = selector({
 		return apartmentsList?.map((apartment) => {
 			return {
 				propertyId: apartment.id,
-				propertyAddress: values(apartment.address).reduce((prev, current) => {
-					return prev + " " + current;
-				}),
+				propertyAddress:
+					apartment.address.country +
+					" " +
+					apartment.address.city +
+					" " +
+					apartment.address.street +
+					" " +
+					apartment.address.flatNumber,
 				propertyDescription: apartment.description,
 				propertyPrice: apartment.price,
 				propertySize: apartment.size,

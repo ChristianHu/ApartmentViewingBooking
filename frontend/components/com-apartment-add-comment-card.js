@@ -1,15 +1,23 @@
-import React, {useState} from "react";
-import {useForm} from "react-hook-form";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRecoilValue } from "recoil";
+import { constGen } from "../constants/const-gen";
+import { stateLogin } from "../states/state-general";
+import { utilRequestSender } from "../utils/util-fetch";
 
-const ComApartmentAddCommentCard = () => {
-	const [rating, setRating] = useState(1)
-	const {
-		register,
-		handleSubmit,
-	} = useForm();
-	
+const reqAddComment = async (data, setter) => {
+	const res = await utilRequestSender("POST", constGen.host + "/comments", null, data);
+	console.log(res);
+	setter && setter(res.data);
+};
+
+const ComApartmentAddCommentCard = ({ flatId }) => {
+	const [rating, setRating] = useState(1);
+	const { register, handleSubmit } = useForm();
+	const loginState = useRecoilValue(stateLogin);
+
 	const handleRating = (number) => {
-		setRating(number)
+		setRating(number);
 	};
 	const renderRatingStars = () => {
 		let result = [];
@@ -40,11 +48,12 @@ const ComApartmentAddCommentCard = () => {
 		}
 		return result;
 	};
-	
+
 	const onSubmit = (data) => {
 		// TODO: handle add comment
-		console.log("Submit test data:")
-		console.log({...data, ...{rating: rating}})
+		console.log("Submit test data:");
+		console.log({ ...data, ...{ rating: rating, flatId: flatId, userId: loginState ? loginState.id : 1 } });
+		reqAddComment({ ...data, ...{ rating: rating, flatId: flatId, userId: loginState ? loginState.id : 1 } }, null);
 	};
 
 	return (
@@ -52,21 +61,17 @@ const ComApartmentAddCommentCard = () => {
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="flex flex-col pt-[18px]">
 					<label className="pb-[4px]">Add your comment here:</label>
-					<textarea
-						className="h-[120px] rounded-[8px] bg-white p-[12px]"
-						{...register("comment", {
-						})}
-					/>
+					<textarea className="h-[120px] rounded-[8px] bg-white p-[12px]" {...register("text", {})} />
 				</div>
 				<ul className="flex flex-row my-[18px]">
 					<li>
 						<div className="mr-[15px]">Rate this apartment: </div>
 					</li>
 					<li>
-						<div className="rating"> { renderRatingStars() }</div>
+						<div className="rating"> {renderRatingStars()}</div>
 					</li>
 				</ul>
-				<input className="flex flex-row w-[256px] m-auto btn my-[20px]" type="submit"/>
+				<input className="flex flex-row w-[256px] m-auto btn my-[20px]" type="submit" />
 			</form>
 		</div>
 	);
