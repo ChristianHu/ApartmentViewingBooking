@@ -1,8 +1,10 @@
 version: "3.9"
 services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-  java:
-    image: "redis:alpine"
+    web:
+        build: ./frontend/
+        ports:
+            - "3000:3000"
+    java:
+        build: ./backend/apartment-viewing-booking/
+        ports:
+            - "8080:8080"
