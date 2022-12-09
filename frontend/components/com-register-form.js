@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { constGen } from "../constants/const-gen";
 import { utilRequestSender } from "../utils/util-fetch";
-import {router} from "next/client";
+import {router} from "next/router";
 
 const reqRegister = async (data, setter) => {
 	try {
