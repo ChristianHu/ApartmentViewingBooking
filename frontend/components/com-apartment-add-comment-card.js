@@ -5,13 +5,14 @@ import { constGen } from "../constants/const-gen";
 import { stateLogin } from "../states/state-general";
 import { utilRequestSender } from "../utils/util-fetch";
 
-const reqAddComment = async (data, setter) => {
+const reqAddComment = async (data, setter, refresher) => {
 	const res = await utilRequestSender("POST", constGen.host + "/comments", null, data);
 	console.log(res);
 	setter && setter(res.data);
+	refresher && refresher();
 };
 
-const ComApartmentAddCommentCard = ({ flatId }) => {
+const ComApartmentAddCommentCard = ({ flatId, forceRefresh, forceRefreshVal }) => {
 	const [rating, setRating] = useState(1);
 	const { register, handleSubmit } = useForm();
 	const loginState = useRecoilValue(stateLogin);
@@ -53,7 +54,11 @@ const ComApartmentAddCommentCard = ({ flatId }) => {
 		// TODO: handle add comment
 		console.log("Submit test data:");
 		console.log({ ...data, ...{ rating: rating, flatId: flatId, userId: loginState ? loginState.id : 1 } });
-		reqAddComment({ ...data, ...{ rating: rating, flatId: flatId, userId: loginState ? loginState.id : 1 } }, null);
+		reqAddComment(
+			{ ...data, ...{ rating: rating, flatId: flatId, userId: loginState ? loginState.id : 1 } },
+			null,
+			() => forceRefresh(!forceRefreshVal)
+		);
 	};
 
 	return (

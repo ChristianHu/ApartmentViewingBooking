@@ -18,11 +18,12 @@ const reqFlat = async (data, setter) => {
 export default function Details({ propertyId }) {
 	const [apartment, setApartment] = useState(null);
 	const [showModal, setShowModal] = useState(false);
+	const [commentRefresh, setCommentRefresh] = useState(false);
 
 	console.log(apartment);
 	useEffect(() => {
 		propertyId && reqFlat(propertyId, setApartment);
-	}, [propertyId]);
+	}, [propertyId, commentRefresh]);
 
 	const handleBook = () => {
 		setShowModal(!showModal);
@@ -92,7 +93,11 @@ export default function Details({ propertyId }) {
 						/>
 					</div>
 					<div>
-						<ComApartmentAddCommentCard flatId={propertyId} />
+						<ComApartmentAddCommentCard
+							forceRefreshVal={commentRefresh}
+							forceRefresh={setCommentRefresh}
+							flatId={propertyId}
+						/>
 					</div>
 					<div className="font-bold">Comments:</div>
 					<div className="my-[18px]">
