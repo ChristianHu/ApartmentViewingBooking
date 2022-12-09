@@ -52,6 +52,19 @@ public class DataLoader implements CommandLineRunner {
                 .securityAnswerTwo("answer2")
                 .build();
         userService.createUser(userDto1);
+
+        UserDto userDto2 = UserDto.builder()
+                .firstName("Alireza")
+                .lastName("Esbati")
+                .username("aesbati")
+                .email("esbati@hotmail.com")
+                .password(PASSWORD)
+                .encryptedPassword(ENCRYPTED_PASSWORD)
+                .age(32)
+                .securityAnswerOne("answer1")
+                .securityAnswerTwo("answer2")
+                .build();
+        userService.createUser(userDto2);
     }
 
     private void loadAddresses() {
