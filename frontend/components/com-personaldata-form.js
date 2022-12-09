@@ -1,8 +1,23 @@
 import { ErrorMessage } from "@hookform/error-message";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { constGen } from "../constants/const-gen";
+import { stateLogin } from "../states/state-general";
+import { utilRequestSender } from "../utils/util-fetch";
+
+const reqDelete = async (data, setter) => {
+	const res = await utilRequestSender("DELETE", constGen.host + "/users/" + data);
+	console.log(res);
+	setter && setter();
+};
 
 const ComPersonalDataForm = () => {
+	const loginState = useRecoilValue(stateLogin);
+	const stateLoginSet = useSetRecoilState(stateLogin);
+	const router = useRouter();
+
 	const {
 		register,
 		handleSubmit,
@@ -12,6 +27,14 @@ const ComPersonalDataForm = () => {
 		console.log(data);
 	};
 	console.log(errors);
+
+	const handleDeleteProfile = () => {
+		console.log("delete profile");
+		reqDelete(loginState.id, () => {
+			stateLoginSet(null);
+			router.push("/");
+		});
+	};
 
 	return (
 		<div className="m-auto max-w-[400px] px-[20px] my-[20px]">
@@ -129,6 +152,11 @@ const ComPersonalDataForm = () => {
 					<input className="btn" type="submit" />
 				</div>
 			</form>
+			<div className="flex flex-col pt-[18px]">
+				<button onClick={handleDeleteProfile} className="btn btn-error ">
+					Delete Profile
+				</button>
+			</div>
 		</div>
 	);
 };
