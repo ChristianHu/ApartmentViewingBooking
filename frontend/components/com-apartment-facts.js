@@ -9,13 +9,13 @@ const ComApartmentFacts = ({ propertyAddress, propertyPrice, propertySize, prope
 			<li>
 				<div className="flex flex-row pb-[5px]">
 					<Image width="24" height="24" src="/icon_price.svg" className="object-contain h-[24px] w-[24px]" alt="Room number Image"/>
-					<div className="ml-[10px] font-semibold">{propertyPrice}</div>
+					<div className="ml-[10px] font-semibold">{propertyPrice} €</div>
 				</div>
 			</li>
 			<li>
 				<div className="flex flex-row pb-[5px]">
 					<Image width="24" height="24" src="/icon_size.svg" className="object-contain h-[24px] w-[24px]" alt="Room number Image"/>
-					<div className="ml-[10px]">{propertySize}</div>
+					<div className="ml-[10px]">{propertySize} square meter</div>
 				</div>
 			</li>
 			<li>
